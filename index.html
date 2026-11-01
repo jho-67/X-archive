@@ -1,0 +1,530 @@
+```react
+import React, { useState, useEffect, useMemo, useRef } from 'react';
+import { 
+  Search, Plus, CheckCircle, Repeat2, Heart, MessageCircle, 
+  BarChart2, Share, Bookmark, RefreshCw, Github, Database, 
+  Settings, Check, ExternalLink, ShieldCheck, ArrowUpRight,
+  Sparkles, Filter, AlertCircle, Copy, Radio, Moon, Sun, MoreVertical
+} from 'lucide-react';
+
+// --- SEED DATA & MOCK POST GENERATOR ---
+const INITIAL_PROFILES = [
+  {
+    id: 'user_elonmusk',
+    handle: 'elonmusk',
+    name: 'Elon Musk',
+    verified: true,
+    avatar: 'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=150&auto=format&fit=crop&q=80',
+    bio: 'Occam’s razor is the most likely outcome. Mars & AI.',
+    followers: '185.4M',
+    following: '742',
+    lastSyncedTweetId: '1780004',
+    unreadCount: 2,
+    syncInterval: 30, // seconds
+    isAutoSyncing: true,
+  },
+  {
+    id: 'user_sama',
+    handle: 'sama',
+    name: 'Sam Altman',
+    verified: true,
+    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80',
+    bio: 'OpenAI. building safe and beneficial AGI.',
+    followers: '3.1M',
+    following: '812',
+    lastSyncedTweetId: '1770003',
+    unreadCount: 0,
+    syncInterval: 60,
+    isAutoSyncing: false,
+  },
+  {
+    id: 'user_paulg',
+    handle: 'paulg',
+    name: 'Paul Graham',
+    verified: true,
+    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80',
+    bio: 'Co-founder Y Combinator. Essays on founders, code, and startups.',
+    followers: '1.9M',
+    following: '490',
+    lastSyncedTweetId: '1760002',
+    unreadCount: 0,
+    syncInterval: 45,
+    isAutoSyncing: true,
+  }
+];
+
+const INITIAL_TWEETS = {
+  user_elonmusk: [
+    {
+      id: '1780004',
+      profileId: 'user_elonmusk',
+      text: 'Starship flight test will test radical engine relights and orbital heat shield endurance. Iteration velocity is everything. 🚀 #SpaceX #Mars',
+      createdAt: new Date(Date.now() - 14 * 60 * 1000).toISOString(),
+      likes: 84200,
+      reposts: 12400,
+      replies: 7890,
+      views: '5.2M',
+      media: 'https://images.unsplash.com/photo-1517976487507-5b6533d44e7c?w=1000&auto=format&fit=crop&q=80',
+      isQuote: false,
+      isPinned: true
+    },
+    {
+      id: '1780003',
+      profileId: 'user_elonmusk',
+      text: 'Next generation Grok will synthesize multimodal world models in real-time. Compute cluster scaling is breathtaking.',
+      createdAt: new Date(Date.now() - 120 * 60 * 1000).toISOString(),
+      likes: 62100,
+      reposts: 8900,
+      replies: 5320,
+      views: '3.8M',
+      media: null,
+      isQuote: false,
+      isPinned: false
+    },
+    {
+      id: '1780002',
+      profileId: 'user_elonmusk',
+      text: 'The best part is no part. The best process is no process. It weighs nothing, costs nothing, can’t go wrong.',
+      createdAt: new Date(Date.now() - 480 * 60 * 1000).toISOString(),
+      likes: 129400,
+      reposts: 28400,
+      replies: 11020,
+      views: '9.4M',
+      media: null,
+      isQuote: false,
+      isPinned: false
+    }
+  ],
+  user_sama: [
+    {
+      id: '1770003',
+      profileId: 'user_sama',
+      text: 'The economic value creation of high-agency agents working alongside ambitious builders over the next 24 months will dwarf previous tech waves.',
+      createdAt: new Date(Date.now() - 45 * 60 * 1000).toISOString(),
+      likes: 24500,
+      reposts: 3200,
+      replies: 1840,
+      views: '1.9M',
+      media: null,
+      isQuote: false,
+      isPinned: false
+    },
+    {
+      id: '1770002',
+      profileId: 'user_sama',
+      text: 'Quiet persistence through uncertainty is the single most predictive trait of founders who change the world.',
+      createdAt: new Date(Date.now() - 360 * 60 * 1000).toISOString(),
+      likes: 41200,
+      reposts: 6800,
+      replies: 2310,
+      views: '2.8M',
+      media: null,
+      isQuote: false,
+      isPinned: false
+    }
+  ],
+  user_paulg: [
+    {
+      id: '1760002',
+      profileId: 'user_paulg',
+      text: 'A good test of whether someone is a genuinely deep thinker: how often do they say something that is both surprising and obviously true in retrospect?',
+      createdAt: new Date(Date.now() - 85 * 60 * 1000).toISOString(),
+      likes: 18900,
+      reposts: 2750,
+      replies: 940,
+      views: '1.4M',
+      media: null,
+      isQuote: false,
+      isPinned: false
+    }
+  ]
+};
+
+export default function App() {
+  const [profiles, setProfiles] = useState(INITIAL_PROFILES);
+  const [tweetsMap, setTweetsMap] = useState(INITIAL_TWEETS);
+  const [selectedProfileId, setSelectedProfileId] = useState('user_elonmusk');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [showAddModal, setShowAddModal] = useState(false);
+  const [showCodeModal, setShowCodeModal] = useState(false);
+  const [newHandleInput, setNewHandleInput] = useState('');
+  const [isAddingUser, setIsAddingUser] = useState(false);
+  const [addStatusMessage, setAddStatusMessage] = useState('');
+  const [syncToast, setSyncToast] = useState(null);
+  const [copiedKey, setCopiedKey] = useState(false);
+
+  // Auto-dismiss toast
+  useEffect(() => {
+    if (syncToast) {
+      const timer = setTimeout(() => setSyncToast(null), 3500);
+      return () => clearTimeout(timer);
+    }
+  }, [syncToast]);
+
+  const activeProfile = useMemo(
+    () => profiles.find(p => p.id === selectedProfileId) || profiles[0],
+    [profiles, selectedProfileId]
+  );
+
+  const activeTweets = useMemo(
+    () => tweetsMap[activeProfile?.id] || [],
+    [tweetsMap, activeProfile]
+  );
+
+  // Filter profiles for WhatsApp left bar
+  const filteredProfiles = useMemo(() => {
+    return profiles.filter(p => 
+      p.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+      p.handle.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  }, [profiles, searchQuery]);
+
+  // Format relative timestamp
+  const getRelativeTime = (isoString) => {
+    try {
+      const diff = Math.floor((new Date() - new Date(isoString)) / 1000);
+      if (diff < 60) return `${diff}s`;
+      if (diff < 3600) return `${Math.floor(diff / 60)}m`;
+      if (diff < 86400) return `${Math.floor(diff / 3600)}h`;
+      return `${Math.floor(diff / 86400)}d`;
+    } catch (e) {
+      return 'now';
+    }
+  };
+
+  // Add a new X profile (Simulates historical backfill)
+  const handleAddNewHandle = async (e) => {
+    e.preventDefault();
+    const handleClean = newHandleInput.replace('@', '').trim();
+    if (!handleClean) return;
+
+    // Check if already added
+    const exists = profiles.find(p => p.handle.toLowerCase() === handleClean.toLowerCase());
+    if (exists) {
+      setSelectedProfileId(exists.id);
+      setShowAddModal(false);
+      setNewHandleInput('');
+      setSyncToast({ type: 'info', text: `@${handleClean} is already monitored in your sync registry!` });
+      return;
+    }
+
+    setIsAddingUser(true);
+    setAddStatusMessage(`Querying X API v2 for @${handleClean}...`);
+    
+    await new Promise(r => setTimeout(r, 650));
+    setAddStatusMessage(`Paginating historical tweets using next_token (batch 1)...`);
+    await new Promise(r => setTimeout(r, 700));
+    setAddStatusMessage(`Inserting into Firestore /artifacts/appId/tweets with ID deduplication...`);
+    await new Promise(r => setTimeout(r, 600));
+
+    const newId = `user_${handleClean.toLowerCase()}`;
+    const generatedTweetId1 = String(Date.now());
+    const generatedTweetId2 = String(Date.now() - 7200000);
+
+    const newProfile = {
+      id: newId,
+      handle: handleClean,
+      name: handleClean.charAt(0).toUpperCase() + handleClean.slice(1),
+      verified: true,
+      avatar: `https://api.dicebear.com/7.x/identicon/svg?seed=${handleClean}`,
+      bio: `Official monitored timeline for @${handleClean}. Synced with Firebase Firestore.`,
+      followers: `${(Math.random() * 50 + 1).toFixed(1)}K`,
+      following: `${Math.floor(Math.random() * 800 + 50)}`,
+      lastSyncedTweetId: generatedTweetId1,
+      unreadCount: 2,
+      syncInterval: 30,
+      isAutoSyncing: true
+    };
+
+    const initialFetchedTweets = [
+      {
+        id: generatedTweetId1,
+        profileId: newId,
+        text: `Hello world from @${handleClean}! Testing seamless archival pipelines to cloud storage with deduplication guarantees. ⚡ #BuildInPublic`,
+        createdAt: new Date().toISOString(),
+        likes: 120,
+        reposts: 24,
+        replies: 15,
+        views: '1.4K',
+        media: null,
+        isQuote: false,
+        isPinned: false
+      },
+      {
+        id: generatedTweetId2,
+        profileId: newId,
+        text: `Historical batch item: verified zero duplication key check using tweet_id as document UID.`,
+        createdAt: new Date(Date.now() - 7200000).toISOString(),
+        likes: 85,
+        reposts: 12,
+        replies: 4,
+        views: '950',
+        media: null,
+        isQuote: false,
+        isPinned: false
+      }
+    ];
+
+    setProfiles(prev => [newProfile, ...prev]);
+    setTweetsMap(prev => ({
+      ...prev,
+      [newId]: initialFetchedTweets
+    }));
+
+    setIsAddingUser(false);
+    setShowAddModal(false);
+    setNewHandleInput('');
+    setSelectedProfileId(newId);
+    setSyncToast({
+      type: 'success',
+      text: `Successfully initialized @${handleClean} & archived 2 historical tweets into Firestore!`
+    });
+  };
+
+  // Simulate new incoming post (tests deduplication)
+  const simulateNewTweet = (profileId) => {
+    const target = profiles.find(p => p.id === profileId);
+    if (!target) return;
+
+    const sampleIdeas = [
+      'Just deployed a major architecture refinement. Microservices consolidated into a unified realtime core.',
+      'Always prioritize low-friction developer experience over unnecessary abstraction layers.',
+      'The compounding returns of shipping daily are astonishing. Keep building.',
+      'Real-time data streaming architectures must guarantee idempotent consumers and zero duplicate writes.',
+      'Huge milestone achieved today with the team! Exciting announcements dropping tomorrow.'
+    ];
+    const pickedText = sampleIdeas[Math.floor(Math.random() * sampleIdeas.length)];
+    const newTweetId = String(Date.now());
+
+    const newTweet = {
+      id: newTweetId,
+      profileId: target.id,
+      text: pickedText,
+      createdAt: new Date().toISOString(),
+      likes: Math.floor(Math.random() * 500) + 12,
+      reposts: Math.floor(Math.random() * 80) + 5,
+      replies: Math.floor(Math.random() * 45) + 2,
+      views: '12.8K',
+      media: Math.random() > 0.6 ? 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1000&auto=format&fit=crop&q=80' : null,
+      isQuote: false,
+      isPinned: false
+    };
+
+    // Deduplication check: verify ID doesn't already exist
+    setTweetsMap(prev => {
+      const currentList = prev[target.id] || [];
+      const alreadyHas = currentList.some(t => t.id === newTweet.id);
+      if (alreadyHas) return prev; // Deduplicated!
+
+      return {
+        ...prev,
+        [target.id]: [newTweet, ...currentList]
+      };
+    });
+
+    // Update profile last synced ID
+    setProfiles(prev => prev.map(p => {
+      if (p.id === target.id) {
+        return {
+          ...p,
+          lastSyncedTweetId: newTweetId,
+          unreadCount: p.id === selectedProfileId ? 0 : p.unreadCount + 1
+        };
+      }
+      return p;
+    }));
+
+    setSyncToast({
+      type: 'new-post',
+      text: `New post detected on X for @${target.handle}! Idempotent Firestore write committed.`
+    });
+  };
+
+  // Toggle Auto-sync
+  const toggleAutoSync = (profileId) => {
+    setProfiles(prev => prev.map(p => {
+      if (p.id === profileId) {
+        const nextState = !p.isAutoSyncing;
+        return { ...p, isAutoSyncing: nextState };
+      }
+      return p;
+    }));
+  };
+
+  // Format Tweet text with highlights for hashtags, mentions, links
+  const renderFormattedTweet = (text) => {
+    const words = text.split(/(\s+)/);
+    return words.map((word, idx) => {
+      if (word.startsWith('@')) {
+        return (
+          <span key={idx} className="text-[#1d9bf0] hover:underline cursor-pointer font-medium">
+            {word}
+          </span>
+        );
+      }
+      if (word.startsWith('#')) {
+        return (
+          <span key={idx} className="text-[#1d9bf0] hover:underline cursor-pointer">
+            {word}
+          </span>
+        );
+      }
+      if (word.startsWith('http://') || word.startsWith('https://')) {
+        return (
+          <a key={idx} href={word} target="_blank" rel="noreferrer" className="text-[#1d9bf0] hover:underline break-all">
+            {word}
+          </a>
+        );
+      }
+      return word;
+    });
+  };
+
+  return (
+    <div className="flex h-screen w-full bg-[#0b141a] text-[#e9edef] font-sans antialiased overflow-hidden select-none">
+      
+      {/* ================= LEFT SIDEBAR (WHATSAPP CHAT LIST STYLE) ================= */}
+      <div className="w-80 md:w-96 flex-shrink-0 flex flex-col border-r border-[#222d34] bg-[#111b21] h-full">
+        {/* WhatsApp-Style Top App Header */}
+        <div className="h-16 bg-[#202c33] px-4 flex items-center justify-between border-b border-[#222d34]">
+          <div className="flex items-center gap-3">
+            <div className="relative">
+              <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-[#00a884] to-[#128c7e] flex items-center justify-center text-white font-bold shadow-md">
+                <Database className="w-5 h-5" />
+              </div>
+              <span className="absolute bottom-0 right-0 w-3 h-3 bg-[#00a884] border-2 border-[#202c33] rounded-full"></span>
+            </div>
+            <div>
+              <div className="text-sm font-semibold text-[#e9edef] tracking-wide flex items-center gap-1.5">
+                X Sync Vault
+                <span className="bg-[#00a884]/20 text-[#00a884] text-[10px] px-1.5 py-0.5 rounded font-mono font-medium">v2.4</span>
+              </div>
+              <div className="text-[11px] text-[#8696a0]">Deduplicated Cloud Stream</div>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-1">
+            <button 
+              onClick={() => setShowCodeModal(true)}
+              title="GitHub Actions & Firestore Code Setup"
+              className="p-2 text-[#aebac1] hover:text-[#e9edef] hover:bg-[#374248] rounded-full transition-colors"
+            >
+              <Github className="w-5 h-5" />
+            </button>
+            <button 
+              onClick={() => setShowAddModal(true)}
+              title="Track New X Profile"
+              className="p-2 text-[#00a884] hover:bg-[#374248] rounded-full transition-colors"
+            >
+              <Plus className="w-5 h-5 stroke-[2.5]" />
+            </button>
+          </div>
+        </div>
+
+        {/* WhatsApp-Style Search Bar */}
+        <div className="p-2.5 bg-[#111b21]">
+          <div className="relative flex items-center bg-[#202c33] rounded-lg px-3 py-1.5 focus-within:ring-1 focus-within:ring-[#00a884]">
+            <Search className="w-4 h-4 text-[#8696a0] mr-3" />
+            <input 
+              type="text"
+              placeholder="Search or start new tracking..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="bg-transparent text-sm w-full text-[#e9edef] placeholder-[#8696a0] focus:outline-none"
+            />
+            {searchQuery && (
+              <button onClick={() => setSearchQuery('')} className="text-xs text-[#8696a0] hover:text-white">
+                ✕
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* Active Sync Status Chip Bar */}
+        <div className="px-4 py-1.5 bg-[#182229] border-y border-[#222d34] flex items-center justify-between text-[11px] text-[#8696a0]">
+          <div className="flex items-center gap-1.5">
+            <Radio className="w-3 h-3 text-[#00a884] animate-pulse" />
+            <span>Monitored Handles: {profiles.length}</span>
+          </div>
+          <span className="font-mono text-[#00a884]">Dedupe: ENABLED</span>
+        </div>
+
+        {/* WhatsApp Chat-Style Account List */}
+        <div className="flex-1 overflow-y-auto divide-y divide-[#202c33]/40">
+          {filteredProfiles.length === 0 ? (
+            <div className="p-8 text-center text-[#8696a0]">
+              <Search className="w-8 h-8 mx-auto mb-2 opacity-40" />
+              <p className="text-sm">No handles match your search.</p>
+              <button 
+                onClick={() => setShowAddModal(true)}
+                className="mt-3 text-xs text-[#00a884] font-medium hover:underline"
+              >
+                Track a new @handle
+              </button>
+            </div>
+          ) : (
+            filteredProfiles.map((profile) => {
+              const tweets = tweetsMap[profile.id] || [];
+              const latestTweet = tweets[0];
+              const isSelected = profile.id === activeProfile?.id;
+
+              return (
+                <div
+                  key={profile.id}
+                  onClick={() => {
+                    setSelectedProfileId(profile.id);
+                    // clear unread
+                    setProfiles(prev => prev.map(p => p.id === profile.id ? { ...p, unreadCount: 0 } : p));
+                  }}
+                  className={`flex items-center gap-3 px-3.5 py-3 cursor-pointer transition-colors relative ${
+                    isSelected ? 'bg-[#2a3942]' : 'hover:bg-[#202c33]'
+                  }`}
+                >
+                  {/* Avatar */}
+                  <div className="relative flex-shrink-0">
+                    <img 
+                      src={profile.avatar} 
+                      alt={profile.name} 
+                      className="w-12 h-12 rounded-full object-cover border border-[#2a3942]"
+                      onError={(e) => {
+                        e.target.src = `https://api.dicebear.com/7.x/identicon/svg?seed=${profile.handle}`;
+                      }}
+                    />
+                    {profile.isAutoSyncing && (
+                      <span 
+                        title="Auto-sync Active"
+                        className="absolute bottom-0 right-0 w-3 h-3 bg-[#00a884] rounded-full border-2 border-[#111b21]" 
+                      />
+                    )}
+                  </div>
+
+                  {/* Chat Metadata & Snippet */}
+                  <div className="flex-1 min-w-0">
+                    <div className="flex justify-between items-baseline mb-0.5">
+                      <div className="flex items-center gap-1.5 truncate">
+                        <span className="font-medium text-[15px] text-[#e9edef] truncate">{profile.name}</span>
+                        {profile.verified && (
+                          <CheckCircle className="w-3.5 h-3.5 text-[#1d9bf0] fill-[#1d9bf0]/20 flex-shrink-0" />
+                        )}
+                        <span className="text-xs text-[#8696a0] truncate font-mono">@{profile.handle}</span>
+                      </div>
+                      <span className="text-[11px] text-[#8696a0] flex-shrink-0 ml-1">
+                        {latestTweet ? getRelativeTime(latestTweet.createdAt) : 'none'}
+                      </span>
+                    </div>
+
+                    <div className="flex items-center justify-between">
+                      <p className="text-[13px] text-[#8696a0] truncate leading-relaxed">
+                        {latestTweet ? latestTweet.text : 'No tweets archived yet.'}
+                      </p>
+                      
+                      {profile.unreadCount > 0 && (
+                        <span className="ml-2 bg-[#00a884] text-[#111b21] font-bold text-[10px] min-w-[18px] h-[18px] rounded-full flex items-center justify-center px-1 flex-shrink-0">
+                          {profile.unreadCount}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              );
+    
