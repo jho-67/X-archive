@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bathruhari Hari's  Varanasi: To The World | Exclusive Ticket Sponsorship Portal</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,800;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome 6 CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        varanasi: {
+                            gold: '#FFD700',
+                            saffron: '#FF9933',
+                            ember: '#EA580C',
+                            obsidian: '#070504',
+                            charcoal: '#110C0A',
+                            sand: '#FDE68A'
+                        }
+                    },
+                    fontFamily: {
+                        cinzel: ['Cinzel', 'serif'],
+                        playfair: ['Playfair Display', 'serif'],
+                        body: ['"Plus Jakarta Sans"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Smooth custom scrolling */
+        ::-webkit-scrollbar { width: 7px; }
+        ::-webkit-scrollbar-track { background: #070504; }
+        ::-webkit-scrollbar-thumb { background: #78350f; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #f59e0b; }
+
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #FFFDF0 0%, #FBBF24 45%, #D97706 80%, #92400E 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gold-foil {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.15) 0%, rgba(255, 153, 51, 0.05) 50%, rgba(217, 119, 6, 0.15) 100%);
+            border: 1px solid rgba(255, 215, 0, 0.35);
+        }
+
+        .glass-panel {
+            background: rgba(17, 12, 10, 0.78);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(255, 184, 0, 0.2);
+        }
+
+        /* Soundwave equalizer animations */
+        .bar-anim { animation: soundWave 1.2s infinite ease-in-out alternate; }
+        .bar-anim:nth-child(2) { animation-delay: 0.2s; }
+        .bar-anim:nth-child(3) { animation-delay: 0.4s; }
+        .bar-anim:nth-child(4) { animation-delay: 0.1s; }
+        @keyframes soundWave {
+            0% { height: 4px; }
+            100% { height: 18px; }
+        }
+
+        /* Subtle sacred aura glow */
+        @keyframes auraPulse {
+            0%, 100% { opacity: 0.85; filter: drop-shadow(0 0 12px rgba(255, 153, 51, 0.4)); }
+            50% { opacity: 1; filter: drop-shadow(0 0 28px rgba(234, 88, 12, 0.7)); }
+        }
+        .aura-glow { animation: auraPulse 4s infinite ease-in-out; }
+    </style>
+</head>
+<body class="bg-[#070504] text-stone-200 font-body min-h-screen overflow-x-hidden selection:bg-amber-600 selection:text-white relative">
+
+    <!-- CONFIGURATION SCRIPT BLOCK: SIMPLE GITHUB REPO EDITING -->
+    <script id="site-config">
+        /* ===============================================================
+           === GITHUB PAGES OWNER CONFIGURATION (EDIT DIRECTLY HERE) ===
+           All friend tickets, release dates, news, & music settings live here.
+           =============================================================== */
+        let PORTAL_CONFIG = {
+            // Target movie premiere date (YYYY-MM-DDTHH:MM:SS)
+            targetMovieDate: "2026-01-14T00:00:00+05:30",
+            
+            // Sponsor & Theater Details
+            sponsorshipDetails: {
+                hostName: "Karthik (SSMB Die-Hard Fan)",
+                hostAvatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80",
+                theaterName: "Prasads Multiplex IMAX Screen 1",
+                city: "Hyderabad",
+                customNote: "Tickets 100% sponsored for my beloved gang. IMAX 3D Day 1 Show 1 madness guaranteed!"
+            },
+
+            // Admin Master Key (Change this to any password for yourself)
+            adminPassword: "varanasiadmin",
+
+            // Optional background audio stream (If empty, falls back to synthesized temple chants drone)
+            customMusicUrl: "",
+
+            // 5-Second One-Line Movie Updates & Ghat Dispatches
+            movieUpdates: [
+                {
+                    icon: "fa-fire",
+                    text: "SSMB completes high-octane 45-day Varanasi ghats schedule with SS Rajamouli!"
+                },
+                {
+                    icon: "fa-film",
+                    text: "MM Keeravani records thunderous traditional Vedic chants fused with African tribal drums."
+                },
+                {
+                    icon: "fa-award",
+                    text: "Batch 1 Golden VIP Passes are now confirmed for close squad members!"
+                },
+                {
+                    icon: "fa-camera",
+                    text: "Hollywood technicians join the crew for next grand Amazonian jungle & Kashi transit sequence."
+                },
+                {
+                    icon: "fa-bell",
+                    text: "Official Title & First Glimpse Teaser expected on Maha Shivaratri!"
+                }
+            ],
+
+            // Film Concept Visuals Gallery
+            movieGallery: [
+                {
+                    title: "The Holy Ganga Twilight Aarti",
+                    tag: "Production Concept",
+                    url: "https://images.unsplash.com/photo-1561361513-2d000a50f0dc?auto=format&fit=crop&w=900&q=80"
+                },
+                {
+                    title: "Sacred Temple Corridors",
+                    tag: "Set Design",
+                    url: "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=900&q=80"
+                },
+                {
+                    title: "The Mystic Ghats at Dawn",
+                    tag: "Location Visual",
+                    url: "https://images.unsplash.com/photo-1596176530529-78163a4f7af2?auto=format&fit=crop&w=900&q=80"
+                }
+            ],
+
+            // Ticket Receivers (Friends List)
+            receivers: [
+                {
+                    id: "VNS-VIP-001",
+                    name: "Vikramaditya Sharma",
+                    badge: "FDFS VIP Club",
+                    seat: "Screen 1 • Row E-15",
+                    category: "confirmed",
+                    tier: "Diamond Pass",
+                    avatar: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=200&q=80"
+                },
+                {
+                    id: "VNS-VIP-002",
+                    name: "Ananya Reddy",
+                    badge: "Varanasi Pioneer",
+                    seat: "Screen 1 • Row E-16",
+                    category: "confirmed",
+                    tier: "Platinum Pass",
+                    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80"
+                },
+                {
+                    id: "VNS-VIP-003",
+                    name: "Rohan Varma",
+                    badge: "FDFS Screen 1",
+                    seat: "Screen 1 • Row E-17",
+                    category: "confirmed",
+                    tier: "Diamond Pass",
+                    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80"
+                },
+                {
+                    id: "VNS-VIP-004",
+                    name: "Sneha Kapoor",
+                    badge: "Globe Trotter",
+                    seat: "Screen 1 • Row F-11",
+                    category: "confirmed",
+                    tier: "Gold Pass",
+                    avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=80"
+                },
+                {
+                    id: "VNS-QUE-101",
+                    name: "Siddharth Jain",
+                    badge: "Queue Rank #01",
+                    seat: "Batch 2 Waiting List",
+                    category: "upcoming",
+                    tier: "Standby Pass",
+                    avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=200&q=80"
+                },
+                {
+                    id: "VNS-QUE-102",
+                    name: "Divya Nambiar",
+                    badge: "Queue Rank #02",
+                    seat: "Batch 2 Waiting List",
+                    category: "upcoming",
+                    tier: "Standby Pass",
+                    avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=200&q=80"
+                }
+            ]
+        };
+        /* === END CONFIG DATA === */
+    </script>
+
+    <!-- Canvas for Sacred Embers Floating from the Ganga Ghats -->
+    <canvas id="emberCanvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
+
+    <!-- CINEMATIC OPENING OVERLAY / SOUND INITIALIZER MODAL -->
+    <div id="openingModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/95 backdrop-blur-2xl transition-opacity duration-700">
+        <div class="relative w-full max-w-lg text-center p-8 rounded-3xl glass-panel gold-foil shadow-2xl">
+            <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-tr from-amber-600 via-orange-500 to-amber-300 flex items-center justify-center text-black text-2xl shadow-lg">
+                <i class="fa-solid fa-om"></i>
+            </div>
+            <span class="text-xs uppercase tracking-widest font-cinzel text-amber-400 block mb-2 font-bold">Exclusive Invitation</span>
+            <h2 class="text-3xl font-extrabold font-cinzel text-white mb-2 leading-tight">SSMB × SSR VARANASI</h2>
+            <p class="text-xs text-stone-300 font-light leading-relaxed mb-6">
+                You have been invited to an exclusive sponsored IMAX Day 1 screening. Click below to initiate the cinematic theme music and view the portal.
+            </p>
+            <button onclick="enterExperience()" class="w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-amber-500 via-amber-400 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-black font-cinzel font-bold text-sm tracking-wider uppercase shadow-xl hover:shadow-amber-500/30 transition transform hover:-translate-y-0.5">
+                <i class="fa-solid fa-play mr-2"></i> Enter Cinematic Experience
+            </button>
+        </div>
+    </div>
+
+    <!-- Navigation & Audio Control Bar -->
+    <nav class="relative z-30 border-b border-amber-950/60 bg-black/70 backdrop-blur-md px-4 sm:px-6 py-2.5">
+        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3 text-xs">
+            <div class="flex items-center space-x-2 text-amber-300">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span class="font-bold tracking-widest uppercase font-cinzel">SSMB29 • Varanasi Portal</span>
+                <span class="hidden sm:inline text-stone-600">|</span>
+                <span class="hidden sm:inline text-stone-400">Personal Sponsorship Pass</span>
+            </div>
+
+            <!-- Audio & GitHub Admin Controls -->
+            <div class="flex items-center space-x-3 ml-auto">
+                <!-- Soundwave Audio Toggle -->
+                <button id="soundToggleBtn" onclick="toggleAudio()" class="px-3.5 py-1.5 rounded-full border border-amber-500/30 bg-stone-900/90 hover:bg-amber-950/60 transition flex items-center gap-2">
+                    <div id="soundWaveVisualizer" class="flex items-end space-x-0.5 h-3">
+                        <span class="w-0.5 bg-amber-400 rounded-full h-1"></span>
+                        <span class="w-0.5 bg-amber-400 rounded-full h-1"></span>
+                        <span class="w-0.5 bg-amber-400 rounded-full h-1"></span>
+                        <span class="w-0.5 bg-amber-400 rounded-full h-1"></span>
+                    </div>
+                    <span id="soundLabel" class="text-[11px] text-amber-300 font-cinzel font-semibold">Theme Audio: Off</span>
+                </button>
+
+                <!-- Admin Button (Protected) -->
+                <button onclick="promptAdminModal()" class="px-3 py-1.5 rounded-full bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-500 hover:to-amber-600 text-black font-semibold tracking-wide flex items-center gap-1.5 shadow-md shadow-amber-900/40 transition">
+                    <i class="fa-solid fa-lock text-[10px]"></i>
+                    <span class="hidden xs:inline">Owner</span> Control
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Showcase Section -->
+    <header class="relative z-10 pt-10 pb-12 px-4 sm:px-6 text-center max-w-5xl mx-auto">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-stone-900/90 border border-amber-500/40 mb-6 shadow-lg shadow-orange-950/40">
+            <i class="fa-solid fa-fire text-amber-400 text-xs"></i>
+            <span class="text-[11px] uppercase font-cinzel font-bold tracking-widest text-amber-200">The Spiritual Globe-Trotting Odyssey</span>
+            <i class="fa-solid fa-om text-orange-400 text-xs"></i>
+        </div>
+
+        <h1 class="text-4xl sm:text-6xl md:text-7xl font-black font-cinzel tracking-tight leading-none mb-3">
+            <span class="block text-stone-300 text-base sm:text-xl tracking-widest uppercase mb-1 font-light">SS Rajamouli Presents</span>
+            <span class="gold-gradient-text aura-glow">MAHESH BABU</span>
+            <span class="block text-2xl sm:text-4xl md:text-5xl mt-2 text-stone-100 font-playfair font-normal italic">The Varanasi Chronicles</span>
+        </h1>
+
+        <!-- Host Sponsor Badge -->
+        <div class="mt-6 inline-flex items-center gap-3 px-5 py-2.5 rounded-2xl glass-panel gold-foil shadow-2xl">
+            <img id="hostAvatar" src="" alt="Host" class="w-11 h-11 rounded-full border-2 border-amber-400 object-cover shadow">
+            <div class="text-left">
+                <span class="text-[10px] tracking-widest uppercase font-cinzel text-amber-400 block font-bold">100% Sponsoring Host</span>
+                <span id="hostName" class="font-bold text-white tracking-wide text-sm sm:text-base">Host Name</span>
+            </div>
+            <div class="pl-4 border-l border-amber-500/30 hidden xs:block">
+                <span id="sponsorshipCount" class="text-xs text-amber-300 font-semibold font-cinzel bg-amber-950/70 px-2.5 py-1 rounded-lg border border-amber-500/30">
+                    0 Confirmed Passes
+                </span>
+            </div>
+        </div>
+
+        <!-- Grand Countdown Dial Section -->
+        <div class="max-w-3xl mx-auto mt-10 rounded-3xl p-6 sm:p-8 glass-panel gold-foil relative overflow-hidden">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-2 mb-6 border-b border-amber-500/20 pb-4">
+                <div class="text-center sm:text-left">
+                    <span class="text-[10px] tracking-widest text-amber-400 font-cinzel uppercase block font-bold">Target Theatrical Release</span>
+                    <h3 class="text-lg font-bold font-cinzel text-white">Sankranti Worldwide Theatrical Premiere</h3>
+                </div>
+                <div class="flex items-center gap-2 bg-black/50 px-3 py-1 rounded-xl border border-amber-500/30 text-xs text-amber-300">
+                    <i class="fa-solid fa-video text-amber-400"></i>
+                    <span id="theaterInfo">Prasads IMAX Screen 1</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-4 gap-2 sm:gap-4 text-center">
+                <div class="p-3 sm:p-4 rounded-2xl bg-black/60 border border-amber-500/20">
+                    <span id="cd-days" class="block text-2xl sm:text-4xl md:text-5xl font-extrabold font-cinzel text-amber-300">00</span>
+                    <span class="text-[10px] sm:text-xs font-semibold tracking-wider text-stone-400 uppercase">Days</span>
+                </div>
+                <div class="p-3 sm:p-4 rounded-2xl bg-black/60 border border-amber-500/20">
+                    <span id="cd-hours" class="block text-2xl sm:text-4xl md:text-5xl font-extrabold font-cinzel text-amber-300">00</span>
+                    <span class="text-[10px] sm:text-xs font-semibold tracking-wider text-stone-400 uppercase">Hours</span>
+                </div>
+                <div class="p-3 sm:p-4 rounded-2xl bg-black/60 border border-amber-500/20">
+                    <span id="cd-minutes" class="block text-2xl sm:text-4xl md:text-5xl font-extrabold font-cinzel text-amber-300">00</span>
+                    <span class="text-[10px] sm:text-xs font-semibold tracking-wider text-stone-400 uppercase">Minutes</span>
+                </div>
+                <div class="p-3 sm:p-4 rounded-2xl bg-black/60 border border-amber-500/20">
+                    <span id="cd-seconds" class="block text-2xl sm:text-4xl md:text-5xl font-extrabold font-cinzel text-orange-400">00</span>
+                    <span class="text-[10px] sm:text-xs font-semibold tracking-wider text-stone-400 uppercase">Seconds</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Concept Visuals Showcase Cards Strip -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 mb-16 relative z-10">
+        <div class="flex items-center justify-between mb-4 border-b border-amber-900/40 pb-3">
+            <h3 class="text-sm uppercase tracking-widest font-cinzel text-amber-300 font-bold flex items-center gap-2">
+                <i class="fa-solid fa-camera-retro"></i>
+                <span>Varanasi Film Visual Concepts</span>
+            </h3>
+            <span class="text-[11px] text-stone-400">Exclusive Cinematic Stills</span>
+        </div>
+        <div id="movieVisualsStrip" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Dynamically populated from config -->
+        </div>
+    </section>
+
+    <!-- Main Content: Ticket Board -->
+    <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 pb-28">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-6 mb-8 border-b border-amber-900/30 pb-6">
+            <div>
+                <h2 class="text-2xl sm:text-3xl font-bold font-cinzel text-white flex items-center gap-3">
+                    <i class="fa-solid fa-ticket-simple text-amber-400"></i>
+                    <span>Ticket Sponsorship Board</span>
+                </h2>
+                <p class="text-xs sm:text-sm text-stone-400 mt-1">
+                    Find your name, review your allocated seat, and inspect your luxury souvenir pass.
+                </p>
+            </div>
+
+            <!-- Search & Filter Controls -->
+            <div class="flex flex-wrap items-center gap-3 w-full md:w-auto">
+                <div class="relative flex-1 md:w-60">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-stone-400 text-xs"></i>
+                    <input id="searchInput" oninput="filterPeople()" type="text" placeholder="Search friend's name..." 
+                        class="w-full bg-stone-900/90 border border-amber-500/30 rounded-xl pl-9 pr-3 py-2 text-xs text-white placeholder-stone-500 focus:outline-none focus:border-amber-400">
+                </div>
+
+                <div class="flex p-1 bg-stone-950/80 rounded-xl border border-amber-500/20">
+                    <button id="tabConfirmedBtn" onclick="switchTab('confirmed')" class="px-4 py-1.5 rounded-lg text-xs font-semibold transition bg-amber-500 text-black shadow-sm">
+                        Confirmed (<span id="confirmedCountBadge">0</span>)
+                    </button>
+                    <button id="tabUpcomingBtn" onclick="switchTab('upcoming')" class="px-4 py-1.5 rounded-lg text-xs font-semibold transition text-stone-400 hover:text-white">
+                        Upcoming / Batch 2 (<span id="upcomingCountBadge">0</span>)
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cards Grid Container -->
+        <div id="peopleCardsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <!-- Dynamic Content rendered via JavaScript -->
+        </div>
+
+        <div id="emptySearchNotice" class="hidden text-center py-16">
+            <i class="fa-solid fa-ghost text-4xl text-amber-600/40 mb-3 block"></i>
+            <h4 class="text-lg font-cinzel text-stone-300">No Receiver Found</h4>
+            <p class="text-xs text-stone-500">Only the owner can add you via the GitHub repo configuration.</p>
+        </div>
+    </main>
+
+    <!-- Floating 5-Second One-Line Movie Update Toast -->
+    <div id="liveUpdateBar" class="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-6 sm:w-96 z-40 transition-all duration-500" onmouseenter="pauseTicker()" onmouseleave="resumeTicker()">
+        <div class="glass-panel gold-foil p-4 rounded-2xl shadow-2xl relative overflow-hidden backdrop-blur-xl">
+            <!-- 5-Second Animated Progress Bar -->
+            <div id="toastProgressBar" class="absolute top-0 left-0 h-1 bg-gradient-to-r from-amber-400 via-orange-500 to-amber-300 w-full"></div>
+
+            <div class="flex items-start gap-3">
+                <div class="w-8 h-8 rounded-full bg-gradient-to-br from-amber-500 to-red-600 flex items-center justify-center text-black flex-shrink-0 mt-0.5 shadow-md">
+                    <i id="toastIcon" class="fa-solid fa-bullhorn text-xs"></i>
+                </div>
+                <div class="flex-1 pr-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-[10px] font-bold font-cinzel uppercase tracking-wider text-amber-400">Varanasi Dispatch</span>
+                        <span class="text-[10px] text-stone-400">Pops every 5s</span>
+                    </div>
+                    <p id="toastMessage" class="text-xs text-stone-100 mt-1 font-medium leading-snug">
+                        Loading production bulletin...
+                    </p>
+                </div>
+                <button onclick="dismissToast()" class="text-stone-400 hover:text-white transition text-xs">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Mini Navigation Strip -->
+            <div class="flex items-center justify-between mt-2 pt-2 border-t border-stone-800/80 text-[10px] text-stone-400">
+                <span id="toastCounterIndicator">1 / 5</span>
+                <div class="flex gap-2">
+                    <button onclick="prevUpdate()" class="hover:text-amber-400 transition"><i class="fa-solid fa-chevron-left"></i></button>
+                    <button id="togglePlayBtn" onclick="toggleTickerPlay()" class="hover:text-amber-400 transition"><i class="fa-solid fa-pause"></i></button>
+                    <button onclick="nextUpdate()" class="hover:text-amber-400 transition"><i class="fa-solid fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SOUVENIR TICKET PASS MODAL -->
+    <div id="ticketModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="relative w-full max-w-xl scale-95 transition-transform duration-300" id="ticketModalContent">
+            <button onclick="closeTicketModal()" class="absolute -top-12 right-0 text-white hover:text-amber-400 text-lg font-bold transition p-2">
+                <i class="fa-solid fa-xmark"></i> Close Pass
+            </button>
+
+            <!-- Luxury Boarding Pass Body -->
+            <div class="bg-gradient-to-br from-stone-950 via-[#180f0a] to-[#25130b] rounded-3xl border-2 border-amber-400/80 p-6 sm:p-8 shadow-2xl relative overflow-hidden">
+                <div class="flex items-center justify-between border-b border-amber-500/30 pb-4 mb-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-11 h-11 rounded-2xl bg-amber-500 flex items-center justify-center text-black font-black text-lg font-cinzel">
+                            SSR
+                        </div>
+                        <div>
+                            <span class="text-[10px] font-cinzel uppercase tracking-widest text-amber-400 block font-bold">Official IMAX Souvenir Pass</span>
+                            <h4 class="text-base sm:text-lg font-cinzel font-bold text-white">SSMB29 • THE VARANASI CHRONICLES</h4>
+                        </div>
+                    </div>
+                    <span id="modalTicketTier" class="px-3 py-1 rounded-full text-[10px] font-bold font-cinzel bg-amber-500/20 text-amber-300 border border-amber-500/40 uppercase">
+                        VIP FDFS
+                    </span>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 items-center bg-black/50 p-4 rounded-2xl border border-amber-500/20 mb-4">
+                    <div class="flex items-center gap-3 sm:col-span-2">
+                        <img id="modalAvatar" src="" alt="Avatar" class="w-14 h-14 rounded-full border-2 border-amber-400 object-cover shadow-md">
+                        <div>
+                            <span class="text-[10px] text-stone-400 uppercase tracking-wider block">Ticket Sponsored For</span>
+                            <h3 id="modalName" class="text-lg font-bold text-white font-cinzel leading-tight">Friend Name</h3>
+                            <span id="modalBadge" class="text-xs text-amber-300 inline-block mt-0.5">Varanasi Pioneer</span>
+                        </div>
+                    </div>
+                    <div class="text-left sm:text-right border-t sm:border-t-0 sm:border-l border-stone-800 pt-2 sm:pt-0 sm:pl-4">
+                        <span class="text-[10px] text-stone-400 uppercase tracking-wider block">Seat Allocation</span>
+                        <div id="modalSeat" class="text-base font-bold text-amber-400 font-cinzel">Screen 1 • E-15</div>
+                        <span id="modalStatus" class="text-[10px] text-emerald-400 font-medium">Guaranteed Admission</span>
+                    </div>
+                </div>
+
+                <!-- Custom Note from Sponsor -->
+                <div class="bg-amber-950/20 border border-amber-500/20 rounded-xl p-3 mb-4 text-xs text-amber-200/90 italic">
+                    "<span id="modalCustomNote">A small gesture of love! Let's watch the Mahesh Babu magic on Day 1.</span>"
+                </div>
+
+                <!-- Pass Barcode & Verification -->
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2 text-center sm:text-left">
+                    <div>
+                        <div class="text-[10px] uppercase tracking-widest text-stone-500">Security Pass Code</div>
+                        <div id="modalPassCode" class="text-sm font-mono tracking-widest text-amber-300">VNS-2026-FDFS-893</div>
+                        <div class="text-[10px] text-stone-500 mt-0.5">Organized with pride by <span id="modalHostAttribution">Host</span></div>
+                    </div>
+
+                    <div class="flex items-center space-x-1 h-9 px-3 bg-white/90 rounded-md py-1">
+                        <div class="w-0.5 h-full bg-black"></div>
+                        <div class="w-1.5 h-full bg-black"></div>
+                        <div class="w-1 h-full bg-black"></div>
+                        <div class="w-2 h-full bg-black"></div>
+                        <div class="w-0.5 h-full bg-black"></div>
+                        <div class="w-1.5 h-full bg-black"></div>
+                        <div class="w-2 h-full bg-black"></div>
+                        <div class="w-0.5 h-full bg-black"></div>
+                    </div>
+                </div>
+
+                <div class="mt-6 pt-4 border-t border-amber-900/40 flex items-center justify-between">
+                    <span class="text-[11px] text-stone-400"><i class="fa-solid fa-camera mr-1 text-amber-400"></i> Save a screenshot for theater entry!</span>
+                    <button onclick="copyTicketPass()" class="text-xs bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 px-3 py-1.5 rounded-lg border border-amber-500/40 transition">
+                        <i class="fa-solid fa-copy mr-1"></i> <span id="copyPassBtnText">Copy Pass ID</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- OWNER GITHUB DATA MANAGER MODAL (Password-Protected) -->
+    <div id="adminModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="relative w-full max-w-3xl glass-panel gold-foil rounded-3xl p-6 sm:p-8 max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between border-b border-amber-500/20 pb-4 mb-6">
+                <div>
+                    <h3 class="text-xl font-bold font-cinzel text-white flex items-center gap-2">
+                        <i class="fa-brands fa-github text-amber-400"></i>
+                        <span>Owner's GitHub Repository Manager</span>
+                    </h3>
+                    <p class="text-xs text-stone-400 mt-1">
+                        Only you (the repo owner) can add friends. Add them here and copy the generated block into `index.html`.
+                    </p>
+                </div>
+                <button onclick="closeAdminModal()" class="text-stone-400 hover:text-white p-2 text-lg">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Add Friend Form -->
+            <div class="bg-black/60 p-4 rounded-2xl border border-amber-500/20 mb-6">
+                <h4 class="text-xs font-bold uppercase tracking-wider text-amber-300 font-cinzel mb-3">Add Friend to Ticket List</h4>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+                    <input id="newFriendName" type="text" placeholder="Friend Name (e.g., Rohit)" class="bg-stone-900 border border-stone-700 rounded-xl px-3 py-2 text-xs text-white">
+                    <input id="newFriendBadge" type="text" placeholder="Badge (e.g., FDFS Squad)" class="bg-stone-900 border border-stone-700 rounded-xl px-3 py-2 text-xs text-white">
+                    <input id="newFriendAvatar" type="text" placeholder="Avatar URL (or leave blank)" class="bg-stone-900 border border-stone-700 rounded-xl px-3 py-2 text-xs text-white">
+                    <input id="newFriendSeat" type="text" placeholder="Seat (e.g., Screen 1, Row F-14)" class="bg-stone-900 border border-stone-700 rounded-xl px-3 py-2 text-xs text-white">
+                    <select id="newFriendCategory" class="bg-stone-900 border border-stone-700 rounded-xl px-3 py-2 text-xs text-white">
+                        <option value="confirmed">Confirmed Pass</option>
+                        <option value="upcoming">Upcoming / Batch 2</option>
+                    </select>
+                    <button onclick="addFriendLocally()" class="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black font-bold py-2 px-3 rounded-xl text-xs transition flex items-center justify-center gap-1.5 shadow">
+                        <i class="fa-solid fa-user-plus"></i> Add Friend
+                    </button>
+                </div>
+            </div>
+
+            <!-- Add One-Line Update Form -->
+            <div class="bg-black/60 p-4 rounded-2xl border border-amber-500/20 mb-6">
+                <h4 class="text-xs font-bold uppercase tracking-wider text-amber-300 font-cinzel mb-3">Add 5-Second One-Line Movie Update</h4>
+                <div class="flex gap-2">
+                    <input id="newUpdateText" type="text" placeholder="Enter one-line movie news (e.g., 'Teaser cut locked by SSR')..." class="flex-1 bg-stone-900 border border-stone-700 rounded-xl px-3 py-2 text-xs text-white">
+                    <button onclick="addNewMovieUpdate()" class="bg-amber-600 hover:bg-amber-500 text-white font-semibold py-2 px-4 rounded-xl text-xs transition">
+                        Add Update
+                    </button>
+                </div>
+            </div>
+
+            <!-- Code Generator Block -->
+            <div>
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-xs font-semibold text-stone-300">Your Ready-to-Commit Configuration:</span>
+                    <button id="copyJsonBtn" onclick="copyCompleteConfigForGitHub()" class="px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold flex items-center gap-1.5 transition">
+                        <i class="fa-solid fa-copy"></i>
+                        <span>Copy Code Block</span>
+                    </button>
+                </div>
+                <textarea id="jsonConfigArea" readonly class="w-full h-44 bg-stone-950 font-mono text-[11px] text-amber-300/90 border border-stone-800 rounded-xl p-3 focus:outline-none select-all"></textarea>
+                
+                <div class="mt-4 p-3 bg-amber-950/30 rounded-xl border border-amber-500/20 text-xs text-stone-400 space-y-1">
+                    <div class="font-bold text-amber-300 font-cinzel uppercase">How to update your GitHub Pages:</div>
+                    <ol class="list-decimal pl-4 space-y-0.5 text-[11px]">
+                        <li>Click <strong>"Copy Code Block"</strong> above.</li>
+                        <li>Go to your GitHub repository and edit <code>index.html</code>.</li>
+                        <li>Replace the <code>let PORTAL_CONFIG = { ... };</code> section inside the <code>&lt;script id="site-config"&gt;</code> tag and commit. Your website updates instantly!</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN JAVASCRIPT CONTROLLER -->
+    <script>
+        let currentTab = 'confirmed';
+        let currentUpdateIndex = 0;
+        let updateIntervalId = null;
+        let isTickerPlaying = true;
+        let audioContext = null;
+        let isAudioPlaying = false;
+        let audioGainNode = null;
+        let audioDroneOscs = [];
+        let customAudioElement = null;
+
+        window.onload = function() {
+            initEmbersCanvas();
+            renderHeaderHostDetails();
+            renderVisualConcepts();
+            renderCards();
+            startCountdown();
+            startUpdateTicker();
+            updateGitHubJsonExport();
+        };
+
+        /* -------------------------------------------------------------
+           1. Opening Entrance Modal & Music Initialization
+           ------------------------------------------------------------- */
+        function enterExperience() {
+            const modal = document.getElementById('openingModal');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            setTimeout(() => { modal.style.display = 'none'; }, 700);
+
+            // Initiate Theme Audio upon user gesture
+            toggleAudio(true);
+        }
+
+        /* -------------------------------------------------------------
+           2. Audio Engine (Custom Audio URL or Vedic Synth Chants)
+           ------------------------------------------------------------- */
+        function toggleAudio(forcePlay = false) {
+            const visualizer = document.getElementById('soundWaveVisualizer');
+            const label = document.getElementById('soundLabel');
+
+            if (!isAudioPlaying || forcePlay) {
+                // Play logic
+                if (PORTAL_CONFIG.customMusicUrl) {
+                    if (!customAudioElement) {
+                        customAudioElement = new Audio(PORTAL_CONFIG.customMusicUrl);
+                        customAudioElement.loop = true;
+                    }
+                    customAudioElement.play().catch(e => console.log('Audio autoplay prevented'));
+                } else {
+                    startSacredSynthDrone();
+                }
+
+                isAudioPlaying = true;
+                label.innerText = "Theme Audio: On";
+                visualizer.querySelectorAll('span').forEach(s => s.classList.add('bar-anim'));
+            } else {
+                // Pause logic
+                if (customAudioElement) {
+                    customAudioElement.pause();
+                } else {
+                    stopSacredSynthDrone();
+                }
+                isAudioPlaying = false;
+                label.innerText = "Theme Audio: Off";
+                visualizer.querySelectorAll('span').forEach(s => s.classList.remove('bar-anim'));
+            }
+        }
+
+        function startSacredSynthDrone() {
+            if (!audioContext) {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (audioContext.state === 'suspended') {
+                audioContext.resume();
+            }
+
+            audioGainNode = audioContext.createGain();
+            audioGainNode.gain.setValueAtTime(0.01, audioContext.currentTime);
+            audioGainNode.gain.exponentialRampToValueAtTime(0.08, audioContext.currentTime + 2.5);
+            audioGainNode.connect(audioContext.destination);
+
+            // Harmonic meditative notes (Varanasi Om Drone in D & A)
+            const freqs = [73.42, 110.00, 146.83, 220.00];
+            audioDroneOscs = freqs.map((f, i) => {
+                const osc = audioContext.createOscillator();
+                osc.type = i % 2 === 0 ? 'sine' : 'triangle';
+                osc.frequency.setValueAtTime(f, audioContext.currentTime);
+                osc.connect(audioGainNode);
+                osc.start();
+                return osc;
+            });
+        }
+
+        function stopSacredSynthDrone() {
+            if (audioGainNode && audioContext) {
+                audioGainNode.gain.exponentialRampToValueAtTime(0.0001, audioContext.currentTime + 1);
+                setTimeout(() => {
+                    audioDroneOscs.forEach(osc => { try { osc.stop(); } catch(e){} });
+                    audioDroneOscs = [];
+                }, 1000);
+            }
+        }
+
+        /* -------------------------------------------------------------
+           3. Concept Visuals & Host Details Rendering
+           ------------------------------------------------------------- */
+        function renderHeaderHostDetails() {
+            document.getElementById('hostName').innerText = PORTAL_CONFIG.sponsorshipDetails.hostName;
+            document.getElementById('hostAvatar').src = PORTAL_CONFIG.sponsorshipDetails.hostAvatar;
+            document.getElementById('theaterInfo').innerText = PORTAL_CONFIG.sponsorshipDetails.theaterName;
+            
+            const confirmedCount = PORTAL_CONFIG.receivers.filter(r => r.category === 'confirmed').length;
+            const upcomingCount = PORTAL_CONFIG.receivers.filter(r => r.category === 'upcoming').length;
+            
+            document.getElementById('sponsorshipCount').innerText = `${confirmedCount} Passes Confirmed`;
+            document.getElementById('confirmedCountBadge').innerText = confirmedCount;
+            document.getElementById('upcomingCountBadge').innerText = upcomingCount;
+        }
+
+        function renderVisualConcepts() {
+            const container = document.getElementById('movieVisualsStrip');
+            container.innerHTML = PORTAL_CONFIG.movieGallery.map(img => `
+                <div class="relative group rounded-3xl overflow-hidden glass-panel border border-amber-500/20 shadow-xl">
+                    <img src="${img.url}" alt="${img.title}" class="w-full h-48 object-cover group-hover:scale-105 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent"></div>
+                    <div class="absolute bottom-3 left-4 right-4">
+                        <span class="text-[9px] uppercase font-cinzel font-bold text-amber-400 bg-black/60 px-2 py-0.5 rounded border border-amber-500/30">${img.tag}</span>
+                        <h4 class="text-sm font-cinzel font-bold text-white mt-1">${img.title}</h4>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        /* -------------------------------------------------------------
+           4. Card Rendering & Tab Switching
+           ------------------------------------------------------------- */
+        function switchTab(tab) {
+            currentTab = tab;
+            const tabConfirmedBtn = document.getElementById('tabConfirmedBtn');
+            const tabUpcomingBtn = document.getElementById('tabUpcomingBtn');
+
+            if (tab === 'confirmed') {
+                tabConfirmedBtn.className = "px-4 py-1.5 rounded-lg text-xs font-semibold transition bg-amber-500 text-black shadow-sm";
+                tabUpcomingBtn.className = "px-4 py-1.5 rounded-lg text-xs font-semibold transition text-stone-400 hover:text-white";
+            } else {
+                tabUpcomingBtn.className = "px-4 py-1.5 rounded-lg text-xs font-semibold transition bg-amber-500 text-black shadow-sm";
+                tabConfirmedBtn.className = "px-4 py-1.5 rounded-lg text-xs font-semibold transition text-stone-400 hover:text-white";
+            }
+            filterPeople();
+        }
+
+        function filterPeople() {
+            const query = (document.getElementById('searchInput').value || '').toLowerCase().trim();
+            const grid = document.getElementById('peopleCardsGrid');
+            const emptyNotice = document.getElementById('emptySearchNotice');
+
+            const filtered = PORTAL_CONFIG.receivers.filter(person => {
+                const matchesTab = person.category === currentTab;
+                const matchesSearch = person.name.toLowerCase().includes(query) || person.badge.toLowerCase().includes(query) || person.id.toLowerCase().includes(query);
+                return matchesTab && matchesSearch;
+            });
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '';
+                emptyNotice.classList.remove('hidden');
+                return;
+            }
+
+            emptyNotice.classList.add('hidden');
+            grid.innerHTML = filtered.map(person => createCardHTML(person)).join('');
+        }
+
+        function createCardHTML(person) {
+            const isConfirmed = person.category === 'confirmed';
+            const statusBadgeBg = isConfirmed ? 'bg-amber-500/20 text-amber-300 border-amber-500/40' : 'bg-stone-800 text-stone-300 border-stone-700';
+
+            return `
+                <div class="relative group rounded-3xl glass-panel p-5 border border-amber-500/20 hover:border-amber-400/60 transition-all duration-300 hover:-translate-y-1.5 shadow-xl">
+                    <div class="flex items-center justify-between gap-2 mb-4">
+                        <span class="text-[10px] font-mono tracking-wider text-stone-400 bg-black/50 px-2 py-0.5 rounded border border-stone-800">
+                            ${person.id}
+                        </span>
+                        <span class="text-[10px] font-cinzel font-bold px-2.5 py-0.5 rounded-full border ${statusBadgeBg}">
+                            ${person.tier}
+                        </span>
+                    </div>
+
+                    <div class="flex items-center gap-3.5 mb-4">
+                        <div class="relative">
+                            <img src="${person.avatar}" alt="${person.name}" onerror="this.src='https://placehold.co/120x120/110c0a/e6a122?text=${encodeURIComponent(person.name.charAt(0))}'" class="w-14 h-14 rounded-full object-cover border-2 border-amber-400 shadow-md">
+                            <span class="absolute bottom-0 right-0 w-3.5 h-3.5 ${isConfirmed ? 'bg-emerald-500' : 'bg-amber-600'} border-2 border-stone-900 rounded-full"></span>
+                        </div>
+                        <div class="overflow-hidden">
+                            <h4 class="font-bold text-white text-base truncate font-cinzel group-hover:text-amber-300 transition">${person.name}</h4>
+                            <span class="text-xs text-amber-400 font-medium tracking-wide flex items-center gap-1">
+                                <i class="fa-solid fa-certificate text-[10px]"></i>
+                                <span class="truncate">${person.badge}</span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="bg-black/50 rounded-xl p-2.5 border border-amber-500/15 mb-4 text-xs">
+                        <div class="flex justify-between items-center text-stone-400 mb-1 text-[11px]">
+                            <span>Allocation</span>
+                            <span class="${isConfirmed ? 'text-amber-300' : 'text-stone-400'} font-semibold font-mono">${person.seat}</span>
+                        </div>
+                        <div class="flex justify-between items-center text-stone-400 text-[11px]">
+                            <span>Theater</span>
+                            <span class="text-stone-300">${PORTAL_CONFIG.sponsorshipDetails.theaterName}</span>
+                        </div>
+                    </div>
+
+                    <button onclick="viewSouvenirPass('${person.id}')" class="w-full py-2.5 px-3 rounded-xl bg-stone-900 hover:bg-gradient-to-r hover:from-amber-600 hover:to-amber-500 hover:text-black text-amber-300 font-cinzel font-semibold text-xs border border-amber-500/30 transition flex items-center justify-center gap-2 shadow-sm">
+                        <i class="fa-solid fa-award"></i>
+                        <span>Inspect Souvenir Pass</span>
+                    </button>
+                </div>
+            `;
+        }
+
+        function renderCards() {
+            filterPeople();
+        }
+
+        /* -------------------------------------------------------------
+           5. Souvenir Pass Modal Display
+           ------------------------------------------------------------- */
+        function viewSouvenirPass(personId) {
+            const person = PORTAL_CONFIG.receivers.find(r => r.id === personId);
+            if (!person) return;
+
+            document.getElementById('modalAvatar').src = person.avatar;
+            document.getElementById('modalName').innerText = person.name;
+            document.getElementById('modalBadge').innerText = person.badge;
+            document.getElementById('modalSeat').innerText = person.seat;
+            document.getElementById('modalPassCode').innerText = person.id;
+            document.getElementById('modalTicketTier').innerText = person.tier;
+            document.getElementById('modalStatus').innerText = person.category === 'confirmed' ? 'Guaranteed Admission' : 'Standby Batch 2 Priority';
+            document.getElementById('modalHostAttribution').innerText = PORTAL_CONFIG.sponsorshipDetails.hostName;
+            document.getElementById('modalCustomNote').innerText = PORTAL_CONFIG.sponsorshipDetails.customNote;
+
+            const modal = document.getElementById('ticketModal');
+            const content = document.getElementById('ticketModalContent');
+            modal.classList.remove('pointer-events-none', 'opacity-0');
+            modal.classList.add('opacity-100');
+            content.classList.remove('scale-95');
+            content.classList.add('scale-100');
+        }
+
+        function closeTicketModal() {
+            const modal = document.getElementById('ticketModal');
+            const content = document.getElementById('ticketModalContent');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modal.classList.remove('opacity-100');
+            content.classList.add('scale-95');
+            content.classList.remove('scale-100');
+        }
+
+        function copyTicketPass() {
+            const code = document.getElementById('modalPassCode').innerText;
+            const dummy = document.createElement("input");
+            document.body.appendChild(dummy);
+            dummy.value = `SSMB29 Varanasi Souvenir Ticket Pass: ${code}`;
+            dummy.select();
+            document.execCommand("copy");
+            document.body.removeChild(dummy);
+
+            const btnText = document.getElementById('copyPassBtnText');
+            btnText.innerText = "Copied!";
+            setTimeout(() => { btnText.innerText = "Copy Pass ID"; }, 2000);
+        }
+
+        /* -------------------------------------------------------------
+           6. Real-Time Countdown Engine
+           ------------------------------------------------------------- */
+        function startCountdown() {
+            const targetDate = new Date(PORTAL_CONFIG.targetMovieDate).getTime();
+
+            function updateTime() {
+                const now = new Date().getTime();
+                const diff = targetDate - now;
+
+                if (diff <= 0) {
+                    document.getElementById('cd-days').innerText = "00";
+                    document.getElementById('cd-hours').innerText = "00";
+                    document.getElementById('cd-minutes').innerText = "00";
+                    document.getElementById('cd-seconds').innerText = "00";
+                    return;
+                }
+
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+                document.getElementById('cd-days').innerText = String(days).padStart(2, '0');
+                document.getElementById('cd-hours').innerText = String(hours).padStart(2, '0');
+                document.getElementById('cd-minutes').innerText = String(minutes).padStart(2, '0');
+                document.getElementById('cd-seconds').innerText = String(seconds).padStart(2, '0');
+            }
+
+            updateTime();
+            setInterval(updateTime, 1000);
+        }
+
+        /* -------------------------------------------------------------
+           7. 5-Second One-Line News Ticker Engine
+           ------------------------------------------------------------- */
+        function displayCurrentUpdate() {
+            if (!PORTAL_CONFIG.movieUpdates.length) return;
+            const item = PORTAL_CONFIG.movieUpdates[currentUpdateIndex];
+            
+            const messageEl = document.getElementById('toastMessage');
+            const iconEl = document.getElementById('toastIcon');
+            const indicatorEl = document.getElementById('toastCounterIndicator');
+
+            messageEl.style.opacity = '0';
+            setTimeout(() => {
+                messageEl.innerText = item.text;
+                iconEl.className = `fa-solid ${item.icon || 'fa-bullhorn'} text-xs`;
+                indicatorEl.innerText = `${currentUpdateIndex + 1} / ${PORTAL_CONFIG.movieUpdates.length}`;
+                messageEl.style.opacity = '1';
+            }, 180);
+
+            const pBar = document.getElementById('toastProgressBar');
+            pBar.style.transition = 'none';
+            pBar.style.width = '0%';
+            setTimeout(() => {
+                if (isTickerPlaying) {
+                    pBar.style.transition = 'width 4.9s linear';
+                    pBar.style.width = '100%';
+                }
+            }, 50);
+        }
+
+        function startUpdateTicker() {
+            displayCurrentUpdate();
+            if (updateIntervalId) clearInterval(updateIntervalId);
+
+            updateIntervalId = setInterval(() => {
+                if (isTickerPlaying) {
+                    currentUpdateIndex = (currentUpdateIndex + 1) % PORTAL_CONFIG.movieUpdates.length;
+                    displayCurrentUpdate();
+                }
+            }, 5000);
+        }
+
+        function pauseTicker() {
+            const pBar = document.getElementById('toastProgressBar');
+            pBar.style.transition = 'none';
+        }
+
+        function resumeTicker() {
+            if (isTickerPlaying) {
+                const pBar = document.getElementById('toastProgressBar');
+                pBar.style.transition = 'width 4.9s linear';
+                pBar.style.width = '100%';
+            }
+        }
+
+        function nextUpdate() {
+            currentUpdateIndex = (currentUpdateIndex + 1) % PORTAL_CONFIG.movieUpdates.length;
+            displayCurrentUpdate();
+        }
+
+        function prevUpdate() {
+            currentUpdateIndex = (currentUpdateIndex - 1 + PORTAL_CONFIG.movieUpdates.length) % PORTAL_CONFIG.movieUpdates.length;
+            displayCurrentUpdate();
+        }
+
+        function toggleTickerPlay() {
+            isTickerPlaying = !isTickerPlaying;
+            const icon = document.querySelector('#togglePlayBtn i');
+            if (isTickerPlaying) {
+                icon.className = 'fa-solid fa-pause';
+                displayCurrentUpdate();
+            } else {
+                icon.className = 'fa-solid fa-play';
+                const pBar = document.getElementById('toastProgressBar');
+                pBar.style.transition = 'none';
+            }
+        }
+
+        function dismissToast() {
+            const bar = document.getElementById('liveUpdateBar');
+            bar.style.transform = 'translateY(150%)';
+            bar.style.opacity = '0';
+        }
+
+        /* -------------------------------------------------------------
+           8. Owner-Only Protected GitHub Config Manager
+           ------------------------------------------------------------- */
+        function promptAdminModal() {
+            const entered = prompt("Enter Owner Admin Password to manage ticket data:");
+            if (entered === PORTAL_CONFIG.adminPassword) {
+                openAdminModal();
+            } else if (entered !== null) {
+                alert("Incorrect password. Only the repository owner can manage data.");
+            }
+        }
+
+        function openAdminModal() {
+            updateGitHubJsonExport();
+            const modal = document.getElementById('adminModal');
+            modal.classList.remove('pointer-events-none', 'opacity-0');
+            modal.classList.add('opacity-100');
+        }
+
+        function closeAdminModal() {
+            const modal = document.getElementById('adminModal');
+            modal.classList.add('pointer-events-none', 'opacity-0');
+            modal.classList.remove('opacity-100');
+        }
+
+        function addFriendLocally() {
+            const name = document.getElementById('newFriendName').value.trim();
+            const badge = document.getElementById('newFriendBadge').value.trim() || 'FDFS VIP Club';
+            const avatar = document.getElementById('newFriendAvatar').value.trim() || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=80';
+            const seat = document.getElementById('newFriendSeat').value.trim() || 'Screen 1 • Priority Seat';
+            const category = document.getElementById('newFriendCategory').value;
+
+            if (!name) {
+                alert('Please enter a friend name');
+                return;
+            }
+
+            const newId = category === 'confirmed' 
+                ? `VNS-VIP-${String(PORTAL_CONFIG.receivers.length + 1).padStart(3, '0')}`
+                : `VNS-QUE-${String(PORTAL_CONFIG.receivers.length + 1).padStart(3, '0')}`;
+
+            PORTAL_CONFIG.receivers.unshift({
+                id: newId,
+                name: name,
+                badge: badge,
+                seat: seat,
+                category: category,
+                tier: category === 'confirmed' ? 'Gold Pass' : 'Standby Pass',
+                avatar: avatar
+            });
+
+            document.getElementById('newFriendName').value = '';
+            document.getElementById('newFriendBadge').value = '';
+            document.getElementById('newFriendAvatar').value = '';
+            document.getElementById('newFriendSeat').value = '';
+
+            renderHeaderHostDetails();
+            renderCards();
+            updateGitHubJsonExport();
+
+            const btn = document.getElementById('copyJsonBtn');
+            btn.innerHTML = `<i class="fa-solid fa-check"></i> Added! Copy Config`;
+        }
+
+        function addNewMovieUpdate() {
+            const text = document.getElementById('newUpdateText').value.trim();
+            if (!text) return;
+
+            PORTAL_CONFIG.movieUpdates.unshift({
+                icon: 'fa-bolt',
+                text: text
+            });
+
+            document.getElementById('newUpdateText').value = '';
+            currentUpdateIndex = 0;
+            displayCurrentUpdate();
+            updateGitHubJsonExport();
+        }
+
+        function updateGitHubJsonExport() {
+            const codeOutput = `let PORTAL_CONFIG = ${JSON.stringify(PORTAL_CONFIG, null, 4)};`;
+            document.getElementById('jsonConfigArea').value = codeOutput;
+        }
+
+        function copyCompleteConfigForGitHub() {
+            const textarea = document.getElementById('jsonConfigArea');
+            textarea.select();
+            document.execCommand('copy');
+            
+            const btn = document.getElementById('copyJsonBtn');
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = `<i class="fa-solid fa-circle-check"></i> Copied to Clipboard!`;
+            setTimeout(() => { btn.innerHTML = originalHTML; }, 2500);
+        }
+
+        /* -------------------------------------------------------------
+           9. Floating Golden Embers Particle Canvas
+           ------------------------------------------------------------- */
+        function initEmbersCanvas() {
+            const canvas = document.getElementById('emberCanvas');
+            const ctx = canvas.getContext('2d');
+            let width, height;
+
+            function resize() {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            }
+            resize();
+            window.addEventListener('resize', resize);
+
+            const particles = [];
+            const particleCount = Math.min(window.innerWidth < 640 ? 30 : 65, 75);
+
+            class Ember {
+                constructor() {
+                    this.reset();
+                }
+                reset() {
+                    this.x = Math.random() * width;
+                    this.y = height + Math.random() * 40;
+                    this.size = Math.random() * 2.2 + 0.8;
+                    this.speedY = Math.random() * 1.1 + 0.3;
+                    this.speedX = (Math.random() - 0.5) * 0.7;
+                    this.opacity = Math.random() * 0.7 + 0.2;
+                    this.color = Math.random() > 0.4 ? 'rgba(255, 184, 0,' : 'rgba(234, 88, 12,';
+                }
+                update() {
+                    this.y -= this.speedY;
+                    this.x += this.speedX + Math.sin(this.y * 0.007) * 0.4;
+                    this.opacity -= 0.002;
+                    if (this.y < -10 || this.opacity <= 0) {
+                        this.reset();
+                    }
+                }
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fillStyle = this.color + this.opacity + ')';
+                    ctx.shadowBlur = 8;
+                    ctx.shadowColor = '#f59e0b';
+                    ctx.fill();
+                }
+            }
+
+            for (let i = 0; i < particleCount; i++) {
+                const p = new Ember();
+                p.y = Math.random() * height;
+                particles.push(p);
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, width, height);
+                for (let i = 0; i < particles.length; i++) {
+                    particles[i].update();
+                    particles[i].draw();
+                }
+                requestAnimationFrame(animate);
+            }
+            animate();
+        }
+    </script>
+</body>
+</html>
