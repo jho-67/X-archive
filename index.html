@@ -1,0 +1,1673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jbh's Varanasi Ticket Sponsorship Dashboard | SS Rajamouli's Varanasi: To the World</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Cinzel+Decorative:wght@700;900&family=Marcellus&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Rozha+One&display=swap" rel="stylesheet">
+    <!-- FontAwesome 6 CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        kashi: {
+                            gold: '#FFD700',
+                            antiquegold: '#D4AF37',
+                            saffron: '#FF7700',
+                            ember: '#EA580C',
+                            rudraksha: '#881337',
+                            obsidian: '#0A0705',
+                            charcoal: '#140E0A',
+                            sand: '#FDE68A'
+                        }
+                    },
+                    fontFamily: {
+                        poster: ['"Cinzel Decorative"', 'Cinzel', 'serif'],
+                        cinzel: ['Cinzel', 'serif'],
+                        marcellus: ['Marcellus', 'serif'],
+                        rozha: ['"Rozha One"', 'serif'],
+                        body: ['"Plus Jakarta Sans"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Smooth custom scrolling */
+        ::-webkit-scrollbar { width: 7px; }
+        ::-webkit-scrollbar-track { background: #070504; }
+        ::-webkit-scrollbar-thumb { background: #881337; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #d4af37; }
+
+        /* Poster Title Typography with Metallic Gold Bevel & Fiery Glow */
+        .poster-title-metallic {
+            font-family: 'Cinzel Decorative', 'Cinzel', serif;
+            background: linear-gradient(180deg, #FFFFFF 0%, #FFF3B0 25%, #E5A93C 55%, #9A6216 80%, #522B00 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.9)) drop-shadow(0 0 35px rgba(255, 119, 0, 0.55));
+            letter-spacing: 0.04em;
+        }
+
+        .poster-subtitle-banner {
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.25), rgba(255, 119, 0, 0.45), rgba(212, 175, 55, 0.25), transparent);
+            border-top: 1px solid rgba(255, 215, 0, 0.4);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.4);
+            text-shadow: 0 0 12px rgba(255, 170, 0, 0.8);
+        }
+
+        .gold-foil {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.18) 0%, rgba(255, 119, 0, 0.08) 50%, rgba(136, 19, 55, 0.2) 100%);
+            border: 1px solid rgba(255, 215, 0, 0.38);
+        }
+
+        .glass-panel {
+            background: rgba(14, 9, 7, 0.82);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.24);
+        }
+
+        /* Video background canvas cover */
+        .bg-video-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        .bg-video-wrapper video {
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            filter: brightness(0.55) contrast(1.15) saturate(1.2);
+            transform: scale(1.03);
+        }
+
+        /* Soundwave equalizer animations */
+        .bar-anim { animation: soundWave 1.1s infinite ease-in-out alternate; }
+        .bar-anim:nth-child(2) { animation-delay: 0.2s; }
+        .bar-anim:nth-child(3) { animation-delay: 0.4s; }
+        .bar-anim:nth-child(4) { animation-delay: 0.15s; }
+        @keyframes soundWave {
+            0% { height: 4px; }
+            100% { height: 18px; }
+        }
+
+        /* Holographic ticket shine */
+        .hologram-card {
+            position: relative;
+            overflow: hidden;
+        }
+        .hologram-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(60deg, transparent 40%, rgba(255, 215, 0, 0.15) 50%, rgba(255, 119, 0, 0.1) 55%, transparent 65%);
+            transform: rotate(25deg);
+            pointer-events: none;
+            transition: transform 0.8s ease;
+        }
+        .hologram-card:hover::after {
+            transform: rotate(25deg) translate(30%, 30%);
+        }
+
+        /* Tap & Edit Glow Highlight when Admin Edit Mode is Active */
+        body.edit-mode-active [data-editable="true"] {
+            outline: 2px dashed rgba(245, 158, 11, 0.7);
+            outline-offset: 4px;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+        body.edit-mode-active [data-editable="true"]:hover {
+            outline-color: #f59e0b;
+            background-color: rgba(245, 158, 11, 0.15);
+        }
+        body.edit-mode-active [data-editable="true"]::after {
+            content: '\f304';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #d97706;
+            color: #000;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            font-size: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            z-index: 20;
+        }
+    </style>
+</head>
+<body class="bg-[#070504] text-stone-200 font-body min-h-screen overflow-x-hidden selection:bg-amber-600 selection:text-white relative">
+
+    <!-- CONFIGURATION SCRIPT BLOCK: SIMPLE GITHUB REPO EDITING -->
+    <script id="site-config">
+        /* ===============================================================
+           === JBH'S GITHUB PAGES OWNER CONFIGURATION (EDIT DIRECTLY) ===
+           All friend tickets, video glimpse loop, updates, and release info.
+           =============================================================== */
+        let DEFAULT_PORTAL_CONFIG = {
+            // Target movie premiere date (YYYY-MM-DDTHH:MM:SS)
+            targetMovieDate: "2026-01-14T00:00:00+05:30",
+            
+            // Loop Video & Glimpse Source (Sound-enabled upon initiation)
+            backgroundVideoUrl: "https://assets.mixkit.co/videos/preview/mixkit-fire-and-flames-in-the-dark-32771-large.mp4",
+            fallbackAudioDrone: true,
+
+            // Sponsor & Theater Details
+            sponsorshipDetails: {
+                hostName: "Jbh",
+                hostTitle: "Grand Patron & FDFS Benefactor",
+                hostAvatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80",
+                theaterName: "Prasads Multiplex IMAX Laser Screen 1",
+                city: "Hyderabad",
+                totalBudget: "₹75,000+",
+                customNote: "Organized exclusively by Jbh. Every ticket here is 100% sponsored with love for our squad. Enjoy the Mahesh Babu & SS Rajamouli cinematic thunder from the front rows!"
+            },
+
+            // Admin Master Key (Used to open Jbh's Admin Manager)
+            adminPassword: "jbhadmin",
+
+            // 5-Second One-Line Movie Updates & Ghat Dispatches
+            movieUpdates: [
+                {
+                    icon: "fa-fire",
+                    text: "Varanasi Ghats Schedule Wrapped: SS Rajamouli captures a transcendent 40-minute climax sequence!"
+                },
+                {
+                    icon: "fa-film",
+                    text: "MM Keeravani records monumental Vedic symphony fused with thumping Kashi temple bells."
+                },
+                {
+                    icon: "fa-ticket",
+                    text: "Jbh confirms Batch 1 Golden IMAX Passes: Screen 1 Prime Center Recliners reserved!"
+                },
+                {
+                    icon: "fa-earth-americas",
+                    text: "'Varanasi: To the World' international teaser world tour begins across 12 countries next month."
+                },
+                {
+                    icon: "fa-bolt",
+                    text: "SSMB's ferocious look teaser drop scheduled on Maha Shivaratri at 09:09 AM!"
+                }
+            ],
+
+            // Film Concept Visuals Gallery
+            movieGallery: [
+                {
+                    id: "gal-1",
+                    title: "The Holy Ganga Twilight Aarti",
+                    tag: "Concept Stills",
+                    url: "https://images.unsplash.com/photo-1561361513-2d000a50f0dc?auto=format&fit=crop&w=900&q=80"
+                },
+                {
+                    id: "gal-2",
+                    title: "Vedic Sanctum & Temple Spire",
+                    tag: "Set Architecture",
+                    url: "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=900&q=80"
+                },
+                {
+                    id: "gal-3",
+                    title: "The Mystical Manikarnika Ghat",
+                    tag: "Action Location",
+                    url: "https://images.unsplash.com/photo-1596176530529-78163a4f7af2?auto=format&fit=crop&w=900&q=80"
+                }
+            ],
+
+            // Ticket Receivers (Friends List managed by Jbh)
+            receivers: [
+                {
+                    id: "JBH-VAR-001",
+                    name: "Vikramaditya Sharma",
+                    badge: "FDFS VIP Club",
+                    seat: "IMAX Screen 1 • Row E-15",
+                    category: "confirmed",
+                    tier: "Diamond Pass",
+                    avatar: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=200&q=80"
+                },
+                {
+                    id: "JBH-VAR-002",
+                    name: "Ananya Reddy",
+                    badge: "Varanasi Pioneer",
+                    seat: "IMAX Screen 1 • Row E-16",
+                    category: "confirmed",
+                    tier: "Platinum Pass",
+                    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80"
+                },
+                {
+                    id: "JBH-VAR-003",
+                    name: "Rohan Varma",
+                    badge: "FDFS Screen 1",
+                    seat: "IMAX Screen 1 • Row E-17",
+                    category: "confirmed",
+                    tier: "Diamond Pass",
+                    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80"
+                },
+                {
+                    id: "JBH-VAR-004",
+                    name: "Sneha Kapoor",
+                    badge: "Globe Trotter",
+                    seat: "IMAX Screen 1 • Row F-11",
+                    category: "confirmed",
+                    tier: "Gold Pass",
+                    avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=80"
+                },
+                {
+                    id: "JBH-VAR-005",
+                    name: "Kiran Teja",
+                    badge: "Director's Cut Patron",
+                    seat: "IMAX Screen 1 • Row F-12",
+                    category: "confirmed",
+                    tier: "Gold Pass",
+                    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80"
+                },
+                {
+                    id: "JBH-QUE-101",
+                    name: "Siddharth Jain",
+                    badge: "Queue Rank #01",
+                    seat: "Batch 2 Standby",
+                    category: "upcoming",
+                    tier: "Waitlist Pass",
+                    avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=200&q=80"
+                },
+                {
+                    id: "JBH-QUE-102",
+                    name: "Divya Nambiar",
+                    badge: "Queue Rank #02",
+                    seat: "Batch 2 Standby",
+                    category: "upcoming",
+                    tier: "Waitlist Pass",
+                    avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=200&q=80"
+                }
+            ]
+        };
+
+        // Load cached updates from browser localStorage or fallback to default
+        let savedPortalConfig = localStorage.getItem('JBH_VARANASI_CONFIG');
+        let PORTAL_CONFIG = savedPortalConfig ? JSON.parse(savedPortalConfig) : DEFAULT_PORTAL_CONFIG;
+        /* === END CONFIG DATA === */
+    </script>
+
+    <!-- FULLSCREEN CINEMATIC BACKGROUND VIDEO LAYER (LOOP MODE WITH SOUND) -->
+    <div class="bg-video-wrapper">
+        <video id="bgGlimpseVideo" loop playsinline preload="auto">
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-fire-and-flames-in-the-dark-32771-large.mp4" type="video/mp4">
+        </video>
+        <!-- Atmospheric Vignette & Embers Gradient -->
+        <div class="absolute inset-0 bg-gradient-to-b from-[#070504]/90 via-[#0a0705]/80 to-[#070504] mix-blend-multiply"></div>
+        <div class="absolute inset-0 bg-radial-vignette opacity-80" style="background: radial-gradient(circle at center, transparent 20%, #070504 90%);"></div>
+    </div>
+
+    <!-- Canvas for Floating Varanasi Embers & Sparks -->
+    <canvas id="emberCanvas" class="fixed inset-0 pointer-events-none z-[1]"></canvas>
+
+    <!-- CINEMATIC OPENING OVERLAY / SOUND INITIATION GATEWAY -->
+    <div id="openingModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/95 backdrop-blur-2xl transition-opacity duration-700">
+        <div class="relative w-full max-w-lg text-center p-8 sm:p-10 rounded-3xl glass-panel gold-foil shadow-2xl border-2 border-amber-500/60">
+            <!-- Flaming Trishul & Om Symbol -->
+            <div class="relative w-20 h-20 mx-auto mb-5 rounded-full bg-gradient-to-tr from-amber-600 via-orange-600 to-amber-300 flex items-center justify-center text-black text-3xl shadow-2xl shadow-orange-600/50">
+                <i class="fa-solid fa-om text-2xl"></i>
+                <div class="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-red-600 text-white text-[11px] flex items-center justify-center border border-amber-300">
+                    <i class="fa-solid fa-fire"></i>
+                </div>
+            </div>
+
+            <span class="text-xs uppercase tracking-[0.3em] font-cinzel text-amber-400 block mb-2 font-bold">
+                Jbh's Exclusive Sponsorship Portal
+            </span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold poster-title-metallic mb-1 leading-tight">
+                SS RAJAMOULI'S<br>VARANASI
+            </h2>
+            <div class="text-xs tracking-widest font-cinzel text-amber-300/90 uppercase font-semibold mb-5">
+                TO THE WORLD • SSMB29
+            </div>
+            
+            <p class="text-xs text-stone-300 font-light leading-relaxed mb-6">
+                Experience the official Varanasi glimpse video in continuous loop with immersive audio enabled. Click below to enter your VIP patron gateway.
+            </p>
+
+            <button onclick="enterExperience()" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-amber-500 via-amber-400 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-black font-cinzel font-bold text-sm tracking-widest uppercase shadow-2xl hover:shadow-amber-500/40 transition transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
+                <i class="fa-solid fa-volume-high text-base"></i>
+                <span>Enter Varanasi: Sound & Vision</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Top Navigation & Media Bar -->
+    <nav class="relative z-30 border-b border-amber-950/70 bg-black/80 backdrop-blur-md px-4 sm:px-6 py-2.5">
+        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3 text-xs">
+            <div class="flex items-center space-x-2 text-amber-300">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span class="font-bold tracking-widest uppercase font-cinzel text-stone-100">Jbh's Varanasi Patron Dashboard</span>
+                <span class="hidden sm:inline text-stone-600">|</span>
+                <span class="hidden sm:inline text-amber-400 font-medium">SSMB29 Exclusive</span>
+            </div>
+
+            <!-- Audio/Video Controls & Jbh Admin -->
+            <div class="flex items-center space-x-3 ml-auto">
+                <!-- Sound Toggle with Visualizer -->
+                <button id="soundToggleBtn" onclick="toggleAudio()" class="px-3.5 py-1.5 rounded-full border border-amber-500/30 bg-stone-900/90 hover:bg-amber-950/60 transition flex items-center gap-2">
+                    <div id="soundWaveVisualizer" class="flex items-end space-x-0.5 h-3">
+                        <span class="w-0.5 bg-amber-400 rounded-full h-1"></span>
+                        <span class="w-0.5 bg-amber-400 rounded-full h-1"></span>
+                        <span class="w-0.5 bg-amber-400 rounded-full h-1"></span>
+                        <span class="w-0.5 bg-amber-400 rounded-full h-1"></span>
+                    </div>
+                    <span id="soundLabel" class="text-[11px] text-amber-300 font-cinzel font-semibold">Glimpse Sound: Off</span>
+                </button>
+
+                <!-- Jbh Only Admin Button -->
+                <button id="adminTriggerBtn" onclick="handleAdminAuth()" class="px-3.5 py-1.5 rounded-full bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-500 hover:to-amber-600 text-black font-semibold tracking-wide flex items-center gap-1.5 shadow-md shadow-amber-900/40 transition">
+                    <i class="fa-solid fa-crown text-[10px]"></i>
+                    <span id="adminBtnLabel">Jbh Admin</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ACTIVE EDIT MODE FLOATING TOOLBAR (Visible when Jbh logs in) -->
+    <div id="adminEditBar" class="hidden sticky top-0 z-40 bg-gradient-to-r from-amber-900 via-stone-950 to-amber-950 border-b-2 border-amber-400 px-4 py-2.5 shadow-2xl">
+        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3 text-xs">
+            <div class="flex items-center gap-2 text-amber-300">
+                <span class="w-3 h-3 rounded-full bg-amber-400 animate-ping"></span>
+                <span class="font-cinzel font-bold tracking-wider uppercase text-white">Owner Tap & Edit Mode Active</span>
+                <span class="hidden md:inline text-stone-400">• Tap any dashed card/text to quick-edit</span>
+            </div>
+            <div class="flex items-center gap-2 flex-wrap">
+                <button onclick="openDrawerManager('newReceiver')" class="bg-amber-500 hover:bg-amber-400 text-black px-3 py-1.5 rounded-lg font-bold font-cinzel transition flex items-center gap-1 shadow">
+                    <i class="fa-solid fa-user-plus text-[10px]"></i> Add Friend
+                </button>
+                <button onclick="openDrawerManager('media')" class="bg-stone-900 border border-amber-500/40 hover:bg-stone-800 text-amber-300 px-3 py-1.5 rounded-lg font-semibold transition flex items-center gap-1">
+                    <i class="fa-solid fa-sliders text-[10px]"></i> Edit Video/Text
+                </button>
+                <button onclick="openAdminModal()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-3 py-1.5 rounded-lg font-bold transition flex items-center gap-1 shadow">
+                    <i class="fa-brands fa-github text-[11px]"></i> Push to GitHub
+                </button>
+                <button onclick="exitAdminMode()" class="bg-red-950/70 hover:bg-red-800 text-red-200 border border-red-500/40 px-2.5 py-1.5 rounded-lg transition">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i> Exit
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- EPIC MOVIE POSTER HERO HEADER -->
+    <header class="relative z-10 pt-10 pb-12 px-4 sm:px-6 text-center max-w-5xl mx-auto">
+        <!-- Sanskrit Carved Epigraph -->
+        <div class="inline-flex items-center gap-2 px-5 py-1.5 rounded-full bg-stone-900/90 border border-amber-500/40 mb-6 shadow-xl shadow-orange-950/50">
+            <i class="fa-solid fa-fire text-amber-400 text-xs"></i>
+            <span class="text-[11px] uppercase font-cinzel font-bold tracking-[0.25em] text-amber-200">अविमुक्त क्षेत्र • The Eternal Sanctum</span>
+            <i class="fa-solid fa-om text-orange-400 text-xs"></i>
+        </div>
+
+        <!-- Poster Title Block -->
+        <div class="relative py-2">
+            <span class="block text-xs sm:text-sm tracking-[0.4em] uppercase text-amber-400/90 font-cinzel font-bold mb-2">
+                SS RAJAMOULI'S
+            </span>
+            <h1 class="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black poster-title-metallic leading-none uppercase select-none">
+                VARANASI
+            </h1>
+            <div class="mt-3 inline-block px-8 py-1 poster-subtitle-banner">
+                <span class="text-sm sm:text-xl md:text-2xl font-cinzel font-bold tracking-[0.3em] uppercase text-amber-100">
+                    TO THE WORLD
+                </span>
+            </div>
+            <div class="text-[11px] sm:text-xs tracking-[0.35em] text-stone-400 uppercase mt-3 font-cinzel font-medium">
+                Starring Super Star Mahesh Babu • Musical Odyssey by MM Keeravani
+            </div>
+        </div>
+
+        <!-- Jbh Sponsor Patron Card -->
+        <div id="hostPatronCard" data-editable="true" onclick="handleTapEdit('sponsor')" class="mt-8 inline-flex flex-wrap items-center justify-center gap-4 px-6 py-3.5 rounded-3xl glass-panel gold-foil shadow-2xl max-w-xl mx-auto text-left">
+            <img id="hostAvatar" src="" alt="Jbh" class="w-13 h-13 sm:w-14 sm:h-14 rounded-full border-2 border-amber-400 object-cover shadow-lg shadow-amber-500/30">
+            <div>
+                <span class="text-[10px] tracking-widest uppercase font-cinzel text-amber-400 block font-bold">Patron & Sponsoring Host</span>
+                <span id="hostName" class="font-bold text-white tracking-wide text-lg sm:text-xl font-cinzel">Jbh</span>
+                <span class="block text-[11px] text-stone-400">IMAX Laser Day 1 Patron for Friends & Family</span>
+            </div>
+            <div class="border-t sm:border-t-0 sm:border-l border-amber-500/30 pt-2 sm:pt-0 sm:pl-4 w-full sm:w-auto text-center sm:text-right">
+                <span class="text-[10px] uppercase tracking-wider text-amber-400 font-cinzel block">Tickets Reserved</span>
+                <span id="sponsorshipCount" class="text-sm text-white font-bold font-cinzel">0 Passes</span>
+            </div>
+        </div>
+
+        <!-- Grand Countdown Dial Section -->
+        <div id="countdownBox" data-editable="true" onclick="handleTapEdit('countdown')" class="max-w-3xl mx-auto mt-10 rounded-3xl p-6 sm:p-8 glass-panel gold-foil relative overflow-hidden">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-2 mb-6 border-b border-amber-500/20 pb-4">
+                <div class="text-center sm:text-left">
+                    <span class="text-[10px] tracking-widest text-amber-400 font-cinzel uppercase block font-bold">Theatrical Premiere Countdown</span>
+                    <h3 class="text-lg font-bold font-cinzel text-white">Sankranti Worldwide Theatrical Release</h3>
+                </div>
+                <div class="flex items-center gap-2 bg-black/60 px-3.5 py-1.5 rounded-xl border border-amber-500/30 text-xs text-amber-300">
+                    <i class="fa-solid fa-video text-amber-400"></i>
+                    <span id="theaterInfo">Prasads IMAX Screen 1</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-4 gap-2 sm:gap-4 text-center">
+                <div class="p-3 sm:p-4 rounded-2xl bg-black/70 border border-amber-500/30">
+                    <span id="cd-days" class="block text-2xl sm:text-4xl md:text-5xl font-extrabold font-cinzel text-amber-300">00</span>
+                    <span class="text-[10px] sm:text-xs font-semibold tracking-wider text-stone-400 uppercase">Days</span>
+                </div>
+                <div class="p-3 sm:p-4 rounded-2xl bg-black/70 border border-amber-500/30">
+                    <span id="cd-hours" class="block text-2xl sm:text-4xl md:text-5xl font-extrabold font-cinzel text-amber-300">00</span>
+                    <span class="text-[10px] sm:text-xs font-semibold tracking-wider text-stone-400 uppercase">Hours</span>
+                </div>
+                <div class="p-3 sm:p-4 rounded-2xl bg-black/70 border border-amber-500/30">
+                    <span id="cd-minutes" class="block text-2xl sm:text-4xl md:text-5xl font-extrabold font-cinzel text-amber-300">00</span>
+                    <span class="text-[10px] sm:text-xs font-semibold tracking-wider text-stone-400 uppercase">Minutes</span>
+                </div>
+                <div class="p-3 sm:p-4 rounded-2xl bg-black/70 border border-amber-500/30">
+                    <span id="cd-seconds" class="block text-2xl sm:text-4xl md:text-5xl font-extrabold font-cinzel text-orange-400">00</span>
+                    <span class="text-[10px] sm:text-xs font-semibold tracking-wider text-stone-400 uppercase">Seconds</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Concept Visuals Showcase Cards Strip -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 mb-16 relative z-10">
+        <div class="flex items-center justify-between mb-4 border-b border-amber-900/40 pb-3">
+            <h3 class="text-sm uppercase tracking-widest font-cinzel text-amber-300 font-bold flex items-center gap-2">
+                <i class="fa-solid fa-camera-retro"></i>
+                <span>Varanasi Film Visual Concepts</span>
+            </h3>
+            <span class="text-[11px] text-stone-400">Concept Art & Ghat Frames</span>
+        </div>
+        <div id="movieVisualsStrip" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Dynamically populated from config -->
+        </div>
+    </section>
+
+    <!-- PROMINENT PARTICIPANT SEARCH HUB -->
+    <section class="relative z-20 max-w-5xl mx-auto px-4 sm:px-6 mb-10">
+        <div class="glass-panel gold-foil rounded-3xl p-6 sm:p-8 shadow-2xl border-2 border-amber-500/40 text-center relative overflow-hidden">
+            <span class="text-xs uppercase tracking-[0.3em] font-cinzel text-amber-400 font-bold block mb-2">
+                Participant Ticket Verification Hub
+            </span>
+            <h3 class="text-xl sm:text-2xl font-bold font-cinzel text-white mb-2">
+                Search Your Name or Pass Code to Claim Your Profile Card
+            </h3>
+            <p class="text-xs text-stone-300 max-w-xl mx-auto mb-6">
+                All tickets sponsored exclusively by Jbh. Type your name, assigned seat, or pass ID below to find your golden ticket.
+            </p>
+
+            <div class="relative max-w-2xl mx-auto">
+                <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-amber-400 text-lg"></i>
+                <input id="searchInput" oninput="filterPeople()" type="text" placeholder="Type your name (e.g. Vikram, Sneha), pass ID, or seat..." 
+                    class="w-full bg-stone-950/95 border-2 border-amber-500/60 rounded-2xl pl-12 pr-12 py-3.5 text-sm sm:text-base text-white placeholder-stone-400 focus:outline-none focus:border-amber-400 shadow-inner">
+                <button onclick="clearSearchInput()" id="searchClearBtn" class="hidden absolute right-4 top-1/2 -translate-y-1/2 text-stone-400 hover:text-white">
+                    <i class="fa-solid fa-circle-xmark text-sm"></i>
+                </button>
+            </div>
+
+            <!-- Dynamic Search Result Counter & Filter Pills -->
+            <div class="mt-4 flex flex-wrap items-center justify-center gap-2 pt-2 text-xs">
+                <span class="text-stone-400">Filter By:</span>
+                <button onclick="setCategoryFilter('all')" id="pillFilter-all" class="px-3 py-1 rounded-full border border-amber-500 bg-amber-500 text-black font-semibold text-[11px] transition">
+                    All (<span id="countAllBadge">0</span>)
+                </button>
+                <button onclick="setCategoryFilter('confirmed')" id="pillFilter-confirmed" class="px-3 py-1 rounded-full border border-amber-500/30 bg-stone-900 text-stone-300 hover:text-white font-semibold text-[11px] transition">
+                    Confirmed Passes (<span id="confirmedCountBadge">0</span>)
+                </button>
+                <button onclick="setCategoryFilter('upcoming')" id="pillFilter-upcoming" class="px-3 py-1 rounded-full border border-amber-500/30 bg-stone-900 text-stone-300 hover:text-white font-semibold text-[11px] transition">
+                    Waitlist / Batch 2 (<span id="upcomingCountBadge">0</span>)
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content: Jbh's Ticket Sponsorship Board -->
+    <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 pb-28">
+        <div class="flex items-center justify-between mb-6">
+            <h4 class="text-sm uppercase tracking-widest font-cinzel text-amber-300 font-bold flex items-center gap-2">
+                <i class="fa-solid fa-users"></i>
+                <span id="resultHeading">Matching Receiver Cards</span>
+            </h4>
+            <span id="matchedCountLabel" class="text-xs text-stone-400">Showing all participants</span>
+        </div>
+
+        <!-- Cards Grid Container -->
+        <div id="peopleCardsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <!-- Dynamic Content rendered via JavaScript -->
+        </div>
+
+        <div id="emptySearchNotice" class="hidden text-center py-16 bg-stone-950/70 rounded-3xl border border-dashed border-amber-500/30 max-w-xl mx-auto">
+            <i class="fa-solid fa-ticket-simple text-4xl text-amber-600/50 mb-3 block"></i>
+            <h4 class="text-lg font-cinzel text-white">No Matching Profile Card Found</h4>
+            <p class="text-xs text-stone-400 mt-1 max-w-md mx-auto px-4">
+                Please check your spelling. If Jbh hasn't added your ticket yet, contact Jbh to get added to the VIP pass list!
+            </p>
+            <button onclick="clearSearchInput()" class="mt-4 px-4 py-2 bg-amber-600 hover:bg-amber-500 text-white rounded-xl text-xs font-semibold">
+                Reset Search
+            </button>
+        </div>
+    </main>
+
+    <!-- QUICK TAP-AND-EDIT DRAWER / MODAL -->
+    <div id="quickEditModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="relative w-full max-w-lg glass-panel gold-foil rounded-3xl p-6 sm:p-7 max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between border-b border-amber-500/20 pb-3 mb-5">
+                <h4 id="quickEditTitle" class="text-lg font-cinzel font-bold text-white flex items-center gap-2">
+                    <i class="fa-solid fa-pen-to-square text-amber-400"></i>
+                    <span>Quick Edit</span>
+                </h4>
+                <button onclick="closeQuickEditModal()" class="text-stone-400 hover:text-white p-2">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            
+            <form id="quickEditForm" onsubmit="saveQuickEdit(event)" class="space-y-4">
+                <input type="hidden" id="qeFieldType">
+                <input type="hidden" id="qeTargetId">
+
+                <div id="quickEditDynamicFields" class="space-y-3">
+                    <!-- Injected dynamically based on what was tapped -->
+                </div>
+
+                <div class="pt-4 border-t border-amber-950 flex items-center justify-between gap-3">
+                    <button type="button" id="qeDeleteBtn" onclick="deleteReceiverItem()" class="hidden px-3.5 py-2 rounded-xl bg-red-900/60 hover:bg-red-800 text-red-200 border border-red-500/30 text-xs font-semibold">
+                        <i class="fa-solid fa-trash-can mr-1"></i> Delete
+                    </button>
+                    <div class="flex items-center gap-2 ml-auto">
+                        <button type="button" onclick="closeQuickEditModal()" class="px-4 py-2 rounded-xl bg-stone-900 text-stone-300 text-xs">Cancel</button>
+                        <button type="submit" class="px-5 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 text-black font-cinzel font-bold text-xs shadow-md">
+                            Save Changes
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Floating 5-Second One-Line Movie Update Toast -->
+    <div id="liveUpdateBar" class="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-6 sm:w-96 z-40 transition-all duration-500" onmouseenter="pauseTicker()" onmouseleave="resumeTicker()">
+        <div class="glass-panel gold-foil p-4 rounded-2xl shadow-2xl relative overflow-hidden backdrop-blur-xl">
+            <!-- 5-Second Animated Progress Bar -->
+            <div id="toastProgressBar" class="absolute top-0 left-0 h-1 bg-gradient-to-r from-amber-400 via-orange-500 to-amber-300 w-full"></div>
+
+            <div class="flex items-start gap-3">
+                <div class="w-8 h-8 rounded-full bg-gradient-to-br from-amber-500 to-red-600 flex items-center justify-center text-black flex-shrink-0 mt-0.5 shadow-md">
+                    <i id="toastIcon" class="fa-solid fa-bullhorn text-xs"></i>
+                </div>
+                <div class="flex-1 pr-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-[10px] font-bold font-cinzel uppercase tracking-wider text-amber-400">Varanasi Dispatch</span>
+                        <span class="text-[10px] text-stone-400">Pops every 5s</span>
+                    </div>
+                    <p id="toastMessage" class="text-xs text-stone-100 mt-1 font-medium leading-snug">
+                        Loading production bulletin...
+                    </p>
+                </div>
+                <button onclick="dismissToast()" class="text-stone-400 hover:text-white transition text-xs">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Mini Navigation Strip -->
+            <div class="flex items-center justify-between mt-2 pt-2 border-t border-stone-800/80 text-[10px] text-stone-400">
+                <span id="toastCounterIndicator">1 / 5</span>
+                <div class="flex gap-2">
+                    <button onclick="prevUpdate()" class="hover:text-amber-400 transition"><i class="fa-solid fa-chevron-left"></i></button>
+                    <button id="togglePlayBtn" onclick="toggleTickerPlay()" class="hover:text-amber-400 transition"><i class="fa-solid fa-pause"></i></button>
+                    <button onclick="nextUpdate()" class="hover:text-amber-400 transition"><i class="fa-solid fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SOUVENIR TICKET PASS MODAL -->
+    <div id="ticketModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="relative w-full max-w-xl scale-95 transition-transform duration-300" id="ticketModalContent">
+            <button onclick="closeTicketModal()" class="absolute -top-12 right-0 text-white hover:text-amber-400 text-lg font-bold transition p-2">
+                <i class="fa-solid fa-xmark"></i> Close Pass
+            </button>
+
+            <!-- Luxury Boarding Pass Body -->
+            <div class="bg-gradient-to-br from-stone-950 via-[#180f0a] to-[#25130b] rounded-3xl border-2 border-amber-400/80 p-6 sm:p-8 shadow-2xl relative overflow-hidden hologram-card">
+                <div class="flex items-center justify-between border-b border-amber-500/30 pb-4 mb-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-11 h-11 rounded-2xl bg-amber-500 flex items-center justify-center text-black font-black text-lg font-cinzel">
+                            SSR
+                        </div>
+                        <div>
+                            <span class="text-[10px] font-cinzel uppercase tracking-widest text-amber-400 block font-bold">Official IMAX Souvenir Pass</span>
+                            <h4 class="text-base sm:text-lg font-cinzel font-bold text-white">VARANASI: TO THE WORLD</h4>
+                        </div>
+                    </div>
+                    <span id="modalTicketTier" class="px-3 py-1 rounded-full text-[10px] font-bold font-cinzel bg-amber-500/20 text-amber-300 border border-amber-500/40 uppercase">
+                        VIP FDFS
+                    </span>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 items-center bg-black/60 p-4 rounded-2xl border border-amber-500/20 mb-4">
+                    <div class="flex items-center gap-3 sm:col-span-2">
+                        <img id="modalAvatar" src="" alt="Avatar" class="w-14 h-14 rounded-full border-2 border-amber-400 object-cover shadow-md">
+                        <div>
+                            <span class="text-[10px] text-stone-400 uppercase tracking-wider block">Ticket Sponsored By Jbh For</span>
+                            <h3 id="modalName" class="text-lg font-bold text-white font-cinzel leading-tight">Friend Name</h3>
+                            <span id="modalBadge" class="text-xs text-amber-300 inline-block mt-0.5">Varanasi Pioneer</span>
+                        </div>
+                    </div>
+                    <div class="text-left sm:text-right border-t sm:border-t-0 sm:border-l border-stone-800 pt-2 sm:pt-0 sm:pl-4">
+                        <span class="text-[10px] text-stone-400 uppercase tracking-wider block">Seat Allocation</span>
+                        <div id="modalSeat" class="text-base font-bold text-amber-400 font-cinzel">Screen 1 • E-15</div>
+                        <span id="modalStatus" class="text-[10px] text-emerald-400 font-medium">Guaranteed Admission</span>
+                    </div>
+                </div>
+
+                <!-- Custom Note from Sponsor -->
+                <div class="bg-amber-950/30 border border-amber-500/20 rounded-xl p-3 mb-4 text-xs text-amber-200/90 italic">
+                    "<span id="modalCustomNote">A small gesture of love! Let's watch the Mahesh Babu magic on Day 1.</span>"
+                </div>
+
+                <!-- Pass Barcode & Verification -->
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2 text-center sm:text-left">
+                    <div>
+                        <div class="text-[10px] uppercase tracking-widest text-stone-500">Security Pass Code</div>
+                        <div id="modalPassCode" class="text-sm font-mono tracking-widest text-amber-300">JBH-VAR-001</div>
+                        <div class="text-[10px] text-stone-500 mt-0.5">Presented with pride by <span id="modalHostAttribution">Jbh</span></div>
+                    </div>
+
+                    <div class="flex items-center space-x-1 h-9 px-3 bg-white/90 rounded-md py-1">
+                        <div class="w-0.5 h-full bg-black"></div>
+                        <div class="w-1.5 h-full bg-black"></div>
+                        <div class="w-1 h-full bg-black"></div>
+                        <div class="w-2 h-full bg-black"></div>
+                        <div class="w-0.5 h-full bg-black"></div>
+                        <div class="w-1.5 h-full bg-black"></div>
+                        <div class="w-2 h-full bg-black"></div>
+                        <div class="w-0.5 h-full bg-black"></div>
+                    </div>
+                </div>
+
+                <div class="mt-6 pt-4 border-t border-amber-900/40 flex items-center justify-between">
+                    <span class="text-[11px] text-stone-400"><i class="fa-solid fa-camera mr-1 text-amber-400"></i> Screenshot this pass for theater admission!</span>
+                    <button onclick="copyTicketPass()" class="text-xs bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 px-3 py-1.5 rounded-lg border border-amber-500/40 transition">
+                        <i class="fa-solid fa-copy mr-1"></i> <span id="copyPassBtnText">Copy Pass ID</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JBH OWNER GITHUB DATA MANAGER MODAL (Password-Protected) -->
+    <div id="adminModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="relative w-full max-w-3xl glass-panel gold-foil rounded-3xl p-6 sm:p-8 max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between border-b border-amber-500/20 pb-4 mb-6">
+                <div>
+                    <h3 class="text-xl font-bold font-cinzel text-white flex items-center gap-2">
+                        <i class="fa-brands fa-github text-amber-400"></i>
+                        <span>Jbh's Repository Ticket Manager</span>
+                    </h3>
+                    <p class="text-xs text-stone-400 mt-1">
+                        Only you (Jbh) have access. Add or update friends, video URL, or movie updates and commit directly to GitHub.
+                    </p>
+                </div>
+                <button onclick="closeAdminModal()" class="text-stone-400 hover:text-white p-2 text-lg">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Video Glimpse URL Settings -->
+            <div class="bg-black/60 p-4 rounded-2xl border border-amber-500/20 mb-6">
+                <h4 class="text-xs font-bold uppercase tracking-wider text-amber-300 font-cinzel mb-2">Background Glimpse Video URL</h4>
+                <div class="flex gap-2">
+                    <input id="videoSourceInput" type="text" placeholder="MP4 video glimpse URL..." class="flex-1 bg-stone-900 border border-stone-700 rounded-xl px-3 py-2 text-xs text-white">
+                    <button onclick="updateBackgroundVideo()" class="bg-amber-600 hover:bg-amber-500 text-white font-semibold py-2 px-4 rounded-xl text-xs transition">
+                        Update Video
+                    </button>
+                </div>
+            </div>
+
+            <!-- Add Friend Form -->
+            <div class="bg-black/60 p-4 rounded-2xl border border-amber-500/20 mb-6">
+                <h4 class="text-xs font-bold uppercase tracking-wider text-amber-300 font-cinzel mb-3">Add Friend to Sponsored Ticket List</h4>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+                    <input id="newFriendName" type="text" placeholder="Friend Name (e.g., Rohit)" class="bg-stone-900 border border-stone-700 rounded-xl px-3 py-2 text-xs text-white">
+                    <input id="newFriendBadge" type="text" placeholder="Badge (e.g., FDFS Squad)" class="bg-stone-900 border border-stone-700 rounded-xl px-3 py-2 text-xs text-white">
+                    <input id="newFriendAvatar" type="text" placeholder="Avatar URL (or leave blank)" class="bg-stone-900 border border-stone-700 rounded-xl px-3 py-2 text-xs text-white">
+                    <input id="newFriendSeat" type="text" placeholder="Seat (e.g., IMAX Laser E-18)" class="bg-stone-900 border border-stone-700 rounded-xl px-3 py-2 text-xs text-white">
+                    <select id="newFriendCategory" class="bg-stone-900 border border-stone-700 rounded-xl px-3 py-2 text-xs text-white">
+                        <option value="confirmed">Confirmed Pass</option>
+                        <option value="upcoming">Waitlist / Batch 2</option>
+                    </select>
+                    <button onclick="addFriendLocally()" class="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black font-bold py-2 px-3 rounded-xl text-xs transition flex items-center justify-center gap-1.5 shadow">
+                        <i class="fa-solid fa-user-plus"></i> Add Friend
+                    </button>
+                </div>
+            </div>
+
+            <!-- Add One-Line Update Form -->
+            <div class="bg-black/60 p-4 rounded-2xl border border-amber-500/20 mb-6">
+                <h4 class="text-xs font-bold uppercase tracking-wider text-amber-300 font-cinzel mb-3">Add 5-Second One-Line Movie Update</h4>
+                <div class="flex gap-2">
+                    <input id="newUpdateText" type="text" placeholder="Enter one-line movie news (e.g., 'SSMB intro track recorded')..." class="flex-1 bg-stone-900 border border-stone-700 rounded-xl px-3 py-2 text-xs text-white">
+                    <button onclick="addNewMovieUpdate()" class="bg-amber-600 hover:bg-amber-500 text-white font-semibold py-2 px-4 rounded-xl text-xs transition">
+                        Add Update
+                    </button>
+                </div>
+            </div>
+
+            <!-- Code Generator Block -->
+            <div>
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-xs font-semibold text-stone-300">Ready-to-Commit Configuration for GitHub:</span>
+                    <button id="copyJsonBtn" onclick="copyCompleteConfigForGitHub()" class="px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold flex items-center gap-1.5 transition">
+                        <i class="fa-solid fa-copy"></i>
+                        <span>Copy Code Block</span>
+                    </button>
+                </div>
+                <textarea id="jsonConfigArea" readonly class="w-full h-44 bg-stone-950 font-mono text-[11px] text-amber-300/90 border border-stone-800 rounded-xl p-3 focus:outline-none select-all"></textarea>
+                
+                <div class="mt-4 p-3 bg-amber-950/30 rounded-xl border border-amber-500/20 text-xs text-stone-400 space-y-1">
+                    <div class="font-bold text-amber-300 font-cinzel uppercase">How Jbh updates GitHub Pages:</div>
+                    <ol class="list-decimal pl-4 space-y-0.5 text-[11px]">
+                        <li>Click <strong>"Copy Code Block"</strong> above.</li>
+                        <li>Open your repository on GitHub and edit <code>index.html</code>.</li>
+                        <li>Replace the <code>let DEFAULT_PORTAL_CONFIG = { ... };</code> section and click Commit Changes.</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN JAVASCRIPT CONTROLLER -->
+    <script>
+        let currentCategoryFilter = 'all';
+        let currentUpdateIndex = 0;
+        let updateIntervalId = null;
+        let isTickerPlaying = true;
+        let audioContext = null;
+        let isAudioPlaying = false;
+        let audioGainNode = null;
+        let audioDroneOscs = [];
+        let videoElement = null;
+        let isAdminLoggedIn = false;
+
+        window.onload = function() {
+            videoElement = document.getElementById('bgGlimpseVideo');
+            if (PORTAL_CONFIG.backgroundVideoUrl) {
+                videoElement.src = PORTAL_CONFIG.backgroundVideoUrl;
+            }
+            initEmbersCanvas();
+            renderHeaderHostDetails();
+            renderVisualConcepts();
+            renderCards();
+            startCountdown();
+            startUpdateTicker();
+            updateGitHubJsonExport();
+            document.getElementById('videoSourceInput').value = PORTAL_CONFIG.backgroundVideoUrl;
+        };
+
+        /* Save state to localStorage */
+        function persistConfigLocally() {
+            localStorage.setItem('JBH_VARANASI_CONFIG', JSON.stringify(PORTAL_CONFIG));
+            updateGitHubJsonExport();
+        }
+
+        /* -------------------------------------------------------------
+           1. Opening Gateway & Video / Sound Autoplay Initiation
+           ------------------------------------------------------------- */
+        function enterExperience() {
+            const modal = document.getElementById('openingModal');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            setTimeout(() => { modal.style.display = 'none'; }, 700);
+
+            // Start Video Autoplay
+            if (videoElement) {
+                videoElement.muted = false;
+                videoElement.play().catch(e => {
+                    videoElement.muted = true;
+                    videoElement.play();
+                });
+            }
+
+            // Enable Sound Engine
+            toggleAudio(true);
+        }
+
+        /* -------------------------------------------------------------
+           2. Dual Sound Engine (Video Audio + Vedic Tanpura Drone)
+           ------------------------------------------------------------- */
+        function toggleAudio(forcePlay = false) {
+            const visualizer = document.getElementById('soundWaveVisualizer');
+            const label = document.getElementById('soundLabel');
+
+            if (!isAudioPlaying || forcePlay) {
+                if (videoElement) {
+                    videoElement.muted = false;
+                    videoElement.play().catch(e => console.log('Video playback issue', e));
+                }
+
+                if (PORTAL_CONFIG.fallbackAudioDrone) {
+                    startSacredSynthDrone();
+                }
+
+                isAudioPlaying = true;
+                label.innerText = "Glimpse Sound: On";
+                visualizer.querySelectorAll('span').forEach(s => s.classList.add('bar-anim'));
+            } else {
+                if (videoElement) {
+                    videoElement.muted = true;
+                }
+                stopSacredSynthDrone();
+
+                isAudioPlaying = false;
+                label.innerText = "Glimpse Sound: Off";
+                visualizer.querySelectorAll('span').forEach(s => s.classList.remove('bar-anim'));
+            }
+        }
+
+        function startSacredSynthDrone() {
+            try {
+                if (!audioContext) {
+                    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                if (audioContext.state === 'suspended') {
+                    audioContext.resume();
+                }
+
+                audioGainNode = audioContext.createGain();
+                audioGainNode.gain.setValueAtTime(0.01, audioContext.currentTime);
+                audioGainNode.gain.exponentialRampToValueAtTime(0.06, audioContext.currentTime + 2.5);
+                audioGainNode.connect(audioContext.destination);
+
+                const freqs = [73.42, 110.00, 146.83, 220.00];
+                audioDroneOscs = freqs.map((f, i) => {
+                    const osc = audioContext.createOscillator();
+                    osc.type = i % 2 === 0 ? 'sine' : 'triangle';
+                    osc.frequency.setValueAtTime(f, audioContext.currentTime);
+                    osc.connect(audioGainNode);
+                    osc.start();
+                    return osc;
+                });
+            } catch(e) {
+                console.log('WebAudio initialization delayed', e);
+            }
+        }
+
+        function stopSacredSynthDrone() {
+            if (audioGainNode && audioContext) {
+                audioGainNode.gain.exponentialRampToValueAtTime(0.0001, audioContext.currentTime + 0.8);
+                setTimeout(() => {
+                    audioDroneOscs.forEach(osc => { try { osc.stop(); } catch(e){} });
+                    audioDroneOscs = [];
+                }, 800);
+            }
+        }
+
+        function updateBackgroundVideo() {
+            const newUrl = document.getElementById('videoSourceInput').value.trim();
+            if (newUrl) {
+                PORTAL_CONFIG.backgroundVideoUrl = newUrl;
+                if (videoElement) {
+                    videoElement.src = newUrl;
+                    videoElement.play();
+                }
+                persistConfigLocally();
+                alert('Background glimpse video updated!');
+            }
+        }
+
+        /* -------------------------------------------------------------
+           3. Concept Visuals & Host Details Rendering
+           ------------------------------------------------------------- */
+        function renderHeaderHostDetails() {
+            document.getElementById('hostName').innerText = PORTAL_CONFIG.sponsorshipDetails.hostName;
+            document.getElementById('hostAvatar').src = PORTAL_CONFIG.sponsorshipDetails.hostAvatar;
+            document.getElementById('theaterInfo').innerText = PORTAL_CONFIG.sponsorshipDetails.theaterName;
+            
+            const confirmedCount = PORTAL_CONFIG.receivers.filter(r => r.category === 'confirmed').length;
+            const upcomingCount = PORTAL_CONFIG.receivers.filter(r => r.category === 'upcoming').length;
+            const totalCount = PORTAL_CONFIG.receivers.length;
+            
+            document.getElementById('sponsorshipCount').innerText = `${confirmedCount} VIP Passes Reserved`;
+            document.getElementById('confirmedCountBadge').innerText = confirmedCount;
+            document.getElementById('upcomingCountBadge').innerText = upcomingCount;
+            document.getElementById('countAllBadge').innerText = totalCount;
+        }
+
+        function renderVisualConcepts() {
+            const container = document.getElementById('movieVisualsStrip');
+            container.innerHTML = PORTAL_CONFIG.movieGallery.map(img => `
+                <div data-editable="true" onclick="handleTapEdit('gallery', '${img.id}')" class="relative group rounded-3xl overflow-hidden glass-panel border border-amber-500/25 shadow-xl">
+                    <img src="${img.url}" alt="${img.title}" class="w-full h-48 object-cover group-hover:scale-105 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+                    <div class="absolute bottom-3 left-4 right-4">
+                        <span class="text-[9px] uppercase font-cinzel font-bold text-amber-400 bg-black/70 px-2.5 py-0.5 rounded border border-amber-500/30">${img.tag}</span>
+                        <h4 class="text-sm font-cinzel font-bold text-white mt-1.5">${img.title}</h4>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        /* -------------------------------------------------------------
+           4. Participant Search & Filtering Engine
+           ------------------------------------------------------------- */
+        function setCategoryFilter(category) {
+            currentCategoryFilter = category;
+            ['all', 'confirmed', 'upcoming'].forEach(c => {
+                const pill = document.getElementById(`pillFilter-${c}`);
+                if (c === category) {
+                    pill.className = "px-3 py-1 rounded-full border border-amber-500 bg-amber-500 text-black font-semibold text-[11px] transition shadow";
+                } else {
+                    pill.className = "px-3 py-1 rounded-full border border-amber-500/30 bg-stone-900 text-stone-300 hover:text-white font-semibold text-[11px] transition";
+                }
+            });
+            filterPeople();
+        }
+
+        function clearSearchInput() {
+            const input = document.getElementById('searchInput');
+            input.value = '';
+            document.getElementById('searchClearBtn').classList.add('hidden');
+            filterPeople();
+            input.focus();
+        }
+
+        function filterPeople() {
+            const searchInput = document.getElementById('searchInput');
+            const clearBtn = document.getElementById('searchClearBtn');
+            const query = (searchInput.value || '').toLowerCase().trim();
+            const grid = document.getElementById('peopleCardsGrid');
+            const emptyNotice = document.getElementById('emptySearchNotice');
+            const matchedCountLabel = document.getElementById('matchedCountLabel');
+
+            if (query.length > 0) {
+                clearBtn.classList.remove('hidden');
+            } else {
+                clearBtn.classList.add('hidden');
+            }
+
+            const filtered = PORTAL_CONFIG.receivers.filter(person => {
+                const matchesCategory = currentCategoryFilter === 'all' || person.category === currentCategoryFilter;
+                const matchesSearch = !query || 
+                    person.name.toLowerCase().includes(query) || 
+                    person.badge.toLowerCase().includes(query) || 
+                    person.id.toLowerCase().includes(query) ||
+                    person.seat.toLowerCase().includes(query);
+                return matchesCategory && matchesSearch;
+            });
+
+            matchedCountLabel.innerText = query ? `Found ${filtered.length} matching result(s)` : `Showing ${filtered.length} participants`;
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '';
+                emptyNotice.classList.remove('hidden');
+                return;
+            }
+
+            emptyNotice.classList.add('hidden');
+            grid.innerHTML = filtered.map(person => createCardHTML(person, query)).join('');
+        }
+
+        function highlightMatch(text, query) {
+            if (!query) return text;
+            const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+            return text.replace(regex, `<mark class="bg-amber-500 text-black rounded px-0.5">$1</mark>`);
+        }
+
+        function createCardHTML(person, query = '') {
+            const isConfirmed = person.category === 'confirmed';
+            const statusBadgeBg = isConfirmed ? 'bg-amber-500/20 text-amber-300 border-amber-500/40' : 'bg-stone-800 text-stone-300 border-stone-700';
+
+            return `
+                <div data-editable="true" onclick="onCardClick(event, '${person.id}')" class="relative group rounded-3xl glass-panel p-5 border border-amber-500/20 hover:border-amber-400/60 transition-all duration-300 hover:-translate-y-1.5 shadow-xl hologram-card">
+                    <div class="flex items-center justify-between gap-2 mb-4">
+                        <span class="text-[10px] font-mono tracking-wider text-amber-300 bg-black/60 px-2 py-0.5 rounded border border-amber-500/20">
+                            ${highlightMatch(person.id, query)}
+                        </span>
+                        <span class="text-[10px] font-cinzel font-bold px-2.5 py-0.5 rounded-full border ${statusBadgeBg}">
+                            ${person.tier}
+                        </span>
+                    </div>
+
+                    <div class="flex items-center gap-3.5 mb-4">
+                        <div class="relative flex-shrink-0">
+                            <img src="${person.avatar}" alt="${person.name}" onerror="this.src='https://placehold.co/120x120/110c0a/e6a122?text=${encodeURIComponent(person.name.charAt(0))}'" class="w-14 h-14 rounded-full object-cover border-2 border-amber-400 shadow-md">
+                            <span class="absolute bottom-0 right-0 w-3.5 h-3.5 ${isConfirmed ? 'bg-emerald-500' : 'bg-amber-600'} border-2 border-stone-900 rounded-full"></span>
+                        </div>
+                        <div class="overflow-hidden">
+                            <h4 class="font-bold text-white text-base truncate font-cinzel group-hover:text-amber-300 transition">
+                                ${highlightMatch(person.name, query)}
+                            </h4>
+                            <span class="text-xs text-amber-400 font-medium tracking-wide flex items-center gap-1">
+                                <i class="fa-solid fa-certificate text-[10px]"></i>
+                                <span class="truncate">${highlightMatch(person.badge, query)}</span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="bg-black/60 rounded-xl p-2.5 border border-amber-500/15 mb-4 text-xs">
+                        <div class="flex justify-between items-center text-stone-400 mb-1 text-[11px]">
+                            <span>Seat Assigned</span>
+                            <span class="${isConfirmed ? 'text-amber-300' : 'text-stone-400'} font-semibold font-mono">
+                                ${highlightMatch(person.seat, query)}
+                            </span>
+                        </div>
+                        <div class="flex justify-between items-center text-stone-400 text-[11px]">
+                            <span>Sponsor</span>
+                            <span class="text-amber-400 font-cinzel font-bold">Jbh</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-2">
+                        <button onclick="viewSouvenirPass('${person.id}')" class="flex-1 py-2.5 px-3 rounded-xl bg-stone-900/90 hover:bg-gradient-to-r hover:from-amber-600 hover:to-amber-500 hover:text-black text-amber-300 font-cinzel font-semibold text-xs border border-amber-500/30 transition flex items-center justify-center gap-2 shadow-sm">
+                            <i class="fa-solid fa-award"></i>
+                            <span>Claim / View Pass</span>
+                        </button>
+                        ${isAdminLoggedIn ? `
+                            <button onclick="handleTapEdit('receiver', '${person.id}'); event.stopPropagation();" class="p-2.5 rounded-xl bg-amber-500/20 text-amber-300 hover:bg-amber-500 hover:text-black border border-amber-500/40 text-xs transition" title="Edit this card">
+                                <i class="fa-solid fa-pen"></i>
+                            </button>
+                        ` : ''}
+                    </div>
+                </div>
+            `;
+        }
+
+        function onCardClick(event, personId) {
+            if (isAdminLoggedIn && !event.target.closest('button')) {
+                handleTapEdit('receiver', personId);
+            }
+        }
+
+        function renderCards() {
+            filterPeople();
+        }
+
+        /* -------------------------------------------------------------
+           5. Tap & Edit Drawer Engine (Interactive Owner Controls)
+           ------------------------------------------------------------- */
+        function handleAdminAuth() {
+            if (isAdminLoggedIn) {
+                openAdminModal();
+                return;
+            }
+
+            const entered = prompt("Enter Jbh's Secret Admin Password:");
+            if (entered === PORTAL_CONFIG.adminPassword) {
+                enableAdminEditMode();
+            } else if (entered !== null) {
+                alert("Access Denied: Only Jbh can edit this portal.");
+            }
+        }
+
+        function enableAdminEditMode() {
+            isAdminLoggedIn = true;
+            document.body.classList.add('edit-mode-active');
+            document.getElementById('adminEditBar').classList.remove('hidden');
+            document.getElementById('adminBtnLabel').innerText = "Logged In (Jbh)";
+            renderCards();
+            renderVisualConcepts();
+        }
+
+        function exitAdminMode() {
+            isAdminLoggedIn = false;
+            document.body.classList.remove('edit-mode-active');
+            document.getElementById('adminEditBar').classList.add('hidden');
+            document.getElementById('adminBtnLabel').innerText = "Jbh Admin";
+            renderCards();
+            renderVisualConcepts();
+        }
+
+        function handleTapEdit(type, id = null) {
+            if (!isAdminLoggedIn) return;
+
+            const modal = document.getElementById('quickEditModal');
+            const title = document.getElementById('quickEditTitle');
+            const container = document.getElementById('quickEditDynamicFields');
+            const deleteBtn = document.getElementById('qeDeleteBtn');
+            document.getElementById('qeFieldType').value = type;
+            document.getElementById('qeTargetId').value = id || '';
+            deleteBtn.classList.add('hidden');
+
+            if (type === 'receiver') {
+                const person = PORTAL_CONFIG.receivers.find(r => r.id === id);
+                if (!person) return;
+                title.innerHTML = `<i class="fa-solid fa-user-pen text-amber-400"></i> Edit Receiver Card: ${person.name}`;
+                deleteBtn.classList.remove('hidden');
+
+                container.innerHTML = `
+                    <div>
+                        <label class="text-[10px] uppercase font-bold text-stone-400 block mb-1">Name</label>
+                        <input id="qeName" type="text" value="${person.name}" required class="w-full bg-stone-900 border border-stone-700 rounded-xl px-3 py-2 text-xs text-white">
+                    </div>
+                    <div>
+                        <label class="text-[10px] uppercase font-bold text-stone-400 block mb-1">Badge / Tag</label>
+                        <input id="qeBadge" type="text" value="${person.badge}" required class="w-full bg-stone-900 border border-stone-700 rounded-xl px-3 py-2 text-xs text-white">
+                    </div>
+                    <div>
+                        <label class="text-[10px] uppercase font-bold text-stone-400 block mb-1">Seat Assignment</label>
+                        <input id="qeSeat" type="text" value="${person.seat}" required class="w-full bg-stone-900 border border-stone-700 rounded-xl px-3 py-2 text-xs text-white">
+                    </div>
+                    <div>
+                        <label class="text-[10px] uppercase font-bold text-stone-400 block mb-1">Avatar Image URL</label>
+                        <input id="qeAvatar" type="text" value="${person.avatar}" class="w-full bg-stone-900 border border-stone-700 rounded-xl px-3 py-2 text-xs text-white">
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="text-[10px] uppercase font-bold text-stone-400 block mb-1">Category</label>
+                            <select id="qeCategory" class="w-full bg-stone-900 border border-stone-700 rounded-xl px-3 py-2 text-xs text-white">
+                                <option value="confirmed" ${person.category === 'confirmed' ? 'selected' : ''}>Confirmed Pass</option>
+                                <option value="upcoming" ${person.category === 'upcoming' ? 'selected' : ''}>Waitlist / Batch 2</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="text-[10px] uppercase font-bold text-stone-400 block mb-1">Pass Tier</label>
+                            <input id="qeTier" type="text" value="${person.tier}" class="w-full bg-stone-900 border border-stone-700 rounded-xl px-3 py-2 text-xs text-white">
+                        </div>
+                    </div>
+                `;
+            } else if (type === 'sponsor') {
+                title.innerHTML = `<i class="fa-solid fa-crown text-amber-400"></i> Edit Patron & Theater Details`;
+                container.innerHTML = `
+                    <div>
+                        <label class="text-[10px] uppercase font-bold text-stone-400 block mb-1">Patron Host Name</label>
+                        <input id="qeHostName" type="text" value="${PORTAL_CONFIG.sponsorshipDetails.hostName}" required class="w-full bg-stone-900 border border-stone-700 rounded-xl px-3 py-2 text-xs text-white">
+                    </div>
+                    <div>
+                        <label class="text-[10px] uppercase font-bold text-stone-400 block mb-1">Patron Avatar URL</label>
+                        <input id="qeHostAvatar" type="text" value="${PORTAL_CONFIG.sponsorshipDetails.hostAvatar}" class="w-full bg-stone-900 border border-stone-700 rounded-xl px-3 py-2 text-xs text-white">
+                    </div>
+                    <div>
+                        <label class="text-[10px] uppercase font-bold text-stone-400 block mb-1">Theater Venue</label>
+                        <input id="qeTheater" type="text" value="${PORTAL_CONFIG.sponsorshipDetails.theaterName}" class="w-full bg-stone-900 border border-stone-700 rounded-xl px-3 py-2 text-xs text-white">
+                    </div>
+                    <div>
+                        <label class="text-[10px] uppercase font-bold text-stone-400 block mb-1">Custom Note on Souvenir Tickets</label>
+                        <textarea id="qeCustomNote" rows="3" class="w-full bg-stone-900 border border-stone-700 rounded-xl px-3 py-2 text-xs text-white">${PORTAL_CONFIG.sponsorshipDetails.customNote}</textarea>
+                    </div>
+                `;
+            } else if (type === 'countdown') {
+                title.innerHTML = `<i class="fa-solid fa-calendar-days text-amber-400"></i> Edit Movie Release Date`;
+                container.innerHTML = `
+                    <div>
+                        <label class="text-[10px] uppercase font-bold text-stone-400 block mb-1">Premiere Release Date (ISO / Standard format)</label>
+                        <input id="qeReleaseDate" type="text" value="${PORTAL_CONFIG.targetMovieDate}" required class="w-full bg-stone-900 border border-stone-700 rounded-xl px-3 py-2 text-xs text-white">
+                        <span class="text-[10px] text-stone-400 mt-1 block">Example: 2026-01-14T00:00:00+05:30</span>
+                    </div>
+                `;
+            } else if (type === 'gallery') {
+                const item = PORTAL_CONFIG.movieGallery.find(g => g.id === id);
+                if (!item) return;
+                title.innerHTML = `<i class="fa-solid fa-image text-amber-400"></i> Edit Concept Visual`;
+                container.innerHTML = `
+                    <div>
+                        <label class="text-[10px] uppercase font-bold text-stone-400 block mb-1">Title</label>
+                        <input id="qeGalTitle" type="text" value="${item.title}" required class="w-full bg-stone-900 border border-stone-700 rounded-xl px-3 py-2 text-xs text-white">
+                    </div>
+                    <div>
+                        <label class="text-[10px] uppercase font-bold text-stone-400 block mb-1">Tag / Category</label>
+                        <input id="qeGalTag" type="text" value="${item.tag}" class="w-full bg-stone-900 border border-stone-700 rounded-xl px-3 py-2 text-xs text-white">
+                    </div>
+                    <div>
+                        <label class="text-[10px] uppercase font-bold text-stone-400 block mb-1">Image URL</label>
+                        <input id="qeGalUrl" type="text" value="${item.url}" required class="w-full bg-stone-900 border border-stone-700 rounded-xl px-3 py-2 text-xs text-white">
+                    </div>
+                `;
+            }
+
+            modal.classList.remove('pointer-events-none', 'opacity-0');
+            modal.classList.add('opacity-100');
+        }
+
+        function openDrawerManager(tab) {
+            if (tab === 'newReceiver') {
+                const modal = document.getElementById('quickEditModal');
+                const title = document.getElementById('quickEditTitle');
+                const container = document.getElementById('quickEditDynamicFields');
+                document.getElementById('qeFieldType').value = 'new_receiver';
+                document.getElementById('qeTargetId').value = '';
+                document.getElementById('qeDeleteBtn').classList.add('hidden');
+
+                title.innerHTML = `<i class="fa-solid fa-user-plus text-amber-400"></i> Add New Participant`;
+                container.innerHTML = `
+                    <div>
+                        <label class="text-[10px] uppercase font-bold text-stone-400 block mb-1">Friend Name</label>
+                        <input id="qeNewName" type="text" placeholder="e.g. Harsha Vardhan" required class="w-full bg-stone-900 border border-stone-700 rounded-xl px-3 py-2 text-xs text-white">
+                    </div>
+                    <div>
+                        <label class="text-[10px] uppercase font-bold text-stone-400 block mb-1">Badge</label>
+                        <input id="qeNewBadge" type="text" value="FDFS VIP Club" class="w-full bg-stone-900 border border-stone-700 rounded-xl px-3 py-2 text-xs text-white">
+                    </div>
+                    <div>
+                        <label class="text-[10px] uppercase font-bold text-stone-400 block mb-1">Seat Location</label>
+                        <input id="qeNewSeat" type="text" value="IMAX Screen 1 • Row E" class="w-full bg-stone-900 border border-stone-700 rounded-xl px-3 py-2 text-xs text-white">
+                    </div>
+                    <div>
+                        <label class="text-[10px] uppercase font-bold text-stone-400 block mb-1">Avatar URL</label>
+                        <input id="qeNewAvatar" type="text" placeholder="https://..." class="w-full bg-stone-900 border border-stone-700 rounded-xl px-3 py-2 text-xs text-white">
+                    </div>
+                    <div>
+                        <label class="text-[10px] uppercase font-bold text-stone-400 block mb-1">Category</label>
+                        <select id="qeNewCategory" class="w-full bg-stone-900 border border-stone-700 rounded-xl px-3 py-2 text-xs text-white">
+                            <option value="confirmed">Confirmed Pass</option>
+                            <option value="upcoming">Waitlist / Batch 2</option>
+                        </select>
+                    </div>
+                `;
+                modal.classList.remove('pointer-events-none', 'opacity-0');
+                modal.classList.add('opacity-100');
+            } else if (tab === 'media') {
+                openAdminModal();
+            }
+        }
+
+        function saveQuickEdit(e) {
+            e.preventDefault();
+            const type = document.getElementById('qeFieldType').value;
+            const targetId = document.getElementById('qeTargetId').value;
+
+            if (type === 'receiver') {
+                const person = PORTAL_CONFIG.receivers.find(r => r.id === targetId);
+                if (person) {
+                    person.name = document.getElementById('qeName').value.trim();
+                    person.badge = document.getElementById('qeBadge').value.trim();
+                    person.seat = document.getElementById('qeSeat').value.trim();
+                    person.avatar = document.getElementById('qeAvatar').value.trim() || person.avatar;
+                    person.category = document.getElementById('qeCategory').value;
+                    person.tier = document.getElementById('qeTier').value.trim();
+                }
+            } else if (type === 'new_receiver') {
+                const name = document.getElementById('qeNewName').value.trim();
+                const badge = document.getElementById('qeNewBadge').value.trim() || 'FDFS VIP Club';
+                const seat = document.getElementById('qeNewSeat').value.trim() || 'Screen 1 Center';
+                const avatar = document.getElementById('qeNewAvatar').value.trim() || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=80';
+                const category = document.getElementById('qeNewCategory').value;
+                const newId = category === 'confirmed' 
+                    ? `JBH-VAR-${String(PORTAL_CONFIG.receivers.length + 1).padStart(3, '0')}`
+                    : `JBH-QUE-${String(PORTAL_CONFIG.receivers.length + 1).padStart(3, '0')}`;
+
+                PORTAL_CONFIG.receivers.unshift({
+                    id: newId,
+                    name: name,
+                    badge: badge,
+                    seat: seat,
+                    category: category,
+                    tier: category === 'confirmed' ? 'Gold Pass' : 'Standby Pass',
+                    avatar: avatar
+                });
+            } else if (type === 'sponsor') {
+                PORTAL_CONFIG.sponsorshipDetails.hostName = document.getElementById('qeHostName').value.trim();
+                PORTAL_CONFIG.sponsorshipDetails.hostAvatar = document.getElementById('qeHostAvatar').value.trim();
+                PORTAL_CONFIG.sponsorshipDetails.theaterName = document.getElementById('qeTheater').value.trim();
+                PORTAL_CONFIG.sponsorshipDetails.customNote = document.getElementById('qeCustomNote').value.trim();
+            } else if (type === 'countdown') {
+                PORTAL_CONFIG.targetMovieDate = document.getElementById('qeReleaseDate').value.trim();
+            } else if (type === 'gallery') {
+                const item = PORTAL_CONFIG.movieGallery.find(g => g.id === targetId);
+                if (item) {
+                    item.title = document.getElementById('qeGalTitle').value.trim();
+                    item.tag = document.getElementById('qeGalTag').value.trim();
+                    item.url = document.getElementById('qeGalUrl').value.trim();
+                }
+            }
+
+            persistConfigLocally();
+            renderHeaderHostDetails();
+            renderVisualConcepts();
+            renderCards();
+            closeQuickEditModal();
+        }
+
+        function deleteReceiverItem() {
+            const targetId = document.getElementById('qeTargetId').value;
+            if (!confirm(`Are you sure you want to remove this participant?`)) return;
+
+            PORTAL_CONFIG.receivers = PORTAL_CONFIG.receivers.filter(r => r.id !== targetId);
+            persistConfigLocally();
+            renderHeaderHostDetails();
+            renderCards();
+            closeQuickEditModal();
+        }
+
+        function closeQuickEditModal() {
+            const modal = document.getElementById('quickEditModal');
+            modal.classList.add('pointer-events-none', 'opacity-0');
+            modal.classList.remove('opacity-100');
+        }
+
+        /* -------------------------------------------------------------
+           6. Souvenir Pass Modal Display
+           ------------------------------------------------------------- */
+        function viewSouvenirPass(personId) {
+            const person = PORTAL_CONFIG.receivers.find(r => r.id === personId);
+            if (!person) return;
+
+            document.getElementById('modalAvatar').src = person.avatar;
+            document.getElementById('modalName').innerText = person.name;
+            document.getElementById('modalBadge').innerText = person.badge;
+            document.getElementById('modalSeat').innerText = person.seat;
+            document.getElementById('modalPassCode').innerText = person.id;
+            document.getElementById('modalTicketTier').innerText = person.tier;
+            document.getElementById('modalStatus').innerText = person.category === 'confirmed' ? 'Guaranteed Admission' : 'Standby Batch 2 Priority';
+            document.getElementById('modalHostAttribution').innerText = PORTAL_CONFIG.sponsorshipDetails.hostName;
+            document.getElementById('modalCustomNote').innerText = PORTAL_CONFIG.sponsorshipDetails.customNote;
+
+            const modal = document.getElementById('ticketModal');
+            const content = document.getElementById('ticketModalContent');
+            modal.classList.remove('pointer-events-none', 'opacity-0');
+            modal.classList.add('opacity-100');
+            content.classList.remove('scale-95');
+            content.classList.add('scale-100');
+        }
+
+        function closeTicketModal() {
+            const modal = document.getElementById('ticketModal');
+            const content = document.getElementById('ticketModalContent');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modal.classList.remove('opacity-100');
+            content.classList.add('scale-95');
+            content.classList.remove('scale-100');
+        }
+
+        function copyTicketPass() {
+            const code = document.getElementById('modalPassCode').innerText;
+            const dummy = document.createElement("input");
+            document.body.appendChild(dummy);
+            dummy.value = `SS Rajamouli Varanasi: To The World | Jbh Sponsored Pass: ${code}`;
+            dummy.select();
+            document.execCommand("copy");
+            document.body.removeChild(dummy);
+
+            const btnText = document.getElementById('copyPassBtnText');
+            btnText.innerText = "Copied!";
+            setTimeout(() => { btnText.innerText = "Copy Pass ID"; }, 2000);
+        }
+
+        /* -------------------------------------------------------------
+           7. Real-Time Countdown Engine
+           ------------------------------------------------------------- */
+        function startCountdown() {
+            function updateTime() {
+                const targetDate = new Date(PORTAL_CONFIG.targetMovieDate).getTime();
+                const now = new Date().getTime();
+                const diff = targetDate - now;
+
+                if (diff <= 0 || isNaN(diff)) {
+                    document.getElementById('cd-days').innerText = "00";
+                    document.getElementById('cd-hours').innerText = "00";
+                    document.getElementById('cd-minutes').innerText = "00";
+                    document.getElementById('cd-seconds').innerText = "00";
+                    return;
+                }
+
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+                document.getElementById('cd-days').innerText = String(days).padStart(2, '0');
+                document.getElementById('cd-hours').innerText = String(hours).padStart(2, '0');
+                document.getElementById('cd-minutes').innerText = String(minutes).padStart(2, '0');
+                document.getElementById('cd-seconds').innerText = String(seconds).padStart(2, '0');
+            }
+
+            updateTime();
+            setInterval(updateTime, 1000);
+        }
+
+        /* -------------------------------------------------------------
+           8. 5-Second One-Line News Ticker Engine
+           ------------------------------------------------------------- */
+        function displayCurrentUpdate() {
+            if (!PORTAL_CONFIG.movieUpdates.length) return;
+            const item = PORTAL_CONFIG.movieUpdates[currentUpdateIndex];
+            
+            const messageEl = document.getElementById('toastMessage');
+            const iconEl = document.getElementById('toastIcon');
+            const indicatorEl = document.getElementById('toastCounterIndicator');
+
+            messageEl.style.opacity = '0';
+            setTimeout(() => {
+                messageEl.innerText = item.text;
+                iconEl.className = `fa-solid ${item.icon || 'fa-bullhorn'} text-xs`;
+                indicatorEl.innerText = `${currentUpdateIndex + 1} / ${PORTAL_CONFIG.movieUpdates.length}`;
+                messageEl.style.opacity = '1';
+            }, 180);
+
+            const pBar = document.getElementById('toastProgressBar');
+            pBar.style.transition = 'none';
+            pBar.style.width = '0%';
+            setTimeout(() => {
+                if (isTickerPlaying) {
+                    pBar.style.transition = 'width 4.9s linear';
+                    pBar.style.width = '100%';
+                }
+            }, 50);
+        }
+
+        function startUpdateTicker() {
+            displayCurrentUpdate();
+            if (updateIntervalId) clearInterval(updateIntervalId);
+
+            updateIntervalId = setInterval(() => {
+                if (isTickerPlaying) {
+                    currentUpdateIndex = (currentUpdateIndex + 1) % PORTAL_CONFIG.movieUpdates.length;
+                    displayCurrentUpdate();
+                }
+            }, 5000);
+        }
+
+        function pauseTicker() {
+            const pBar = document.getElementById('toastProgressBar');
+            pBar.style.transition = 'none';
+        }
+
+        function resumeTicker() {
+            if (isTickerPlaying) {
+                const pBar = document.getElementById('toastProgressBar');
+                pBar.style.transition = 'width 4.9s linear';
+                pBar.style.width = '100%';
+            }
+        }
+
+        function nextUpdate() {
+            currentUpdateIndex = (currentUpdateIndex + 1) % PORTAL_CONFIG.movieUpdates.length;
+            displayCurrentUpdate();
+        }
+
+        function prevUpdate() {
+            currentUpdateIndex = (currentUpdateIndex - 1 + PORTAL_CONFIG.movieUpdates.length) % PORTAL_CONFIG.movieUpdates.length;
+            displayCurrentUpdate();
+        }
+
+        function toggleTickerPlay() {
+            isTickerPlaying = !isTickerPlaying;
+            const icon = document.querySelector('#togglePlayBtn i');
+            if (isTickerPlaying) {
+                icon.className = 'fa-solid fa-pause';
+                displayCurrentUpdate();
+            } else {
+                icon.className = 'fa-solid fa-play';
+                const pBar = document.getElementById('toastProgressBar');
+                pBar.style.transition = 'none';
+            }
+        }
+
+        function dismissToast() {
+            const bar = document.getElementById('liveUpdateBar');
+            bar.style.transform = 'translateY(150%)';
+            bar.style.opacity = '0';
+        }
+
+        /* -------------------------------------------------------------
+           9. Jbh's Protected GitHub Admin Manager
+           ------------------------------------------------------------- */
+        function openAdminModal() {
+            updateGitHubJsonExport();
+            const modal = document.getElementById('adminModal');
+            modal.classList.remove('pointer-events-none', 'opacity-0');
+            modal.classList.add('opacity-100');
+        }
+
+        function closeAdminModal() {
+            const modal = document.getElementById('adminModal');
+            modal.classList.add('pointer-events-none', 'opacity-0');
+            modal.classList.remove('opacity-100');
+        }
+
+        function addFriendLocally() {
+            const name = document.getElementById('newFriendName').value.trim();
+            const badge = document.getElementById('newFriendBadge').value.trim() || 'FDFS VIP Club';
+            const avatar = document.getElementById('newFriendAvatar').value.trim() || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=80';
+            const seat = document.getElementById('newFriendSeat').value.trim() || 'IMAX Laser Priority Seat';
+            const category = document.getElementById('newFriendCategory').value;
+
+            if (!name) {
+                alert('Please enter a friend name');
+                return;
+            }
+
+            const newId = category === 'confirmed' 
+                ? `JBH-VAR-${String(PORTAL_CONFIG.receivers.length + 1).padStart(3, '0')}`
+                : `JBH-QUE-${String(PORTAL_CONFIG.receivers.length + 1).padStart(3, '0')}`;
+
+            PORTAL_CONFIG.receivers.unshift({
+                id: newId,
+                name: name,
+                badge: badge,
+                seat: seat,
+                category: category,
+                tier: category === 'confirmed' ? 'Gold Pass' : 'Standby Pass',
+                avatar: avatar
+            });
+
+            document.getElementById('newFriendName').value = '';
+            document.getElementById('newFriendBadge').value = '';
+            document.getElementById('newFriendAvatar').value = '';
+            document.getElementById('newFriendSeat').value = '';
+
+            persistConfigLocally();
+            renderHeaderHostDetails();
+            renderCards();
+
+            const btn = document.getElementById('copyJsonBtn');
+            btn.innerHTML = `<i class="fa-solid fa-check"></i> Added! Copy Config`;
+        }
+
+        function addNewMovieUpdate() {
+            const text = document.getElementById('newUpdateText').value.trim();
+            if (!text) return;
+
+            PORTAL_CONFIG.movieUpdates.unshift({
+                icon: 'fa-bolt',
+                text: text
+            });
+
+            document.getElementById('newUpdateText').value = '';
+            currentUpdateIndex = 0;
+            displayCurrentUpdate();
+            persistConfigLocally();
+        }
+
+        function updateGitHubJsonExport() {
+            const codeOutput = `let DEFAULT_PORTAL_CONFIG = ${JSON.stringify(PORTAL_CONFIG, null, 4)};`;
+            document.getElementById('jsonConfigArea').value = codeOutput;
+        }
+
+        function copyCompleteConfigForGitHub() {
+            const textarea = document.getElementById('jsonConfigArea');
+            textarea.select();
+            document.execCommand('copy');
+            
+            const btn = document.getElementById('copyJsonBtn');
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = `<i class="fa-solid fa-circle-check"></i> Copied to Clipboard!`;
+            setTimeout(() => { btn.innerHTML = originalHTML; }, 2500);
+        }
+
+        /* -------------------------------------------------------------
+           10. Floating Golden Embers Particle Canvas
+           ------------------------------------------------------------- */
+        function initEmbersCanvas() {
+            const canvas = document.getElementById('emberCanvas');
+            const ctx = canvas.getContext('2d');
+            let width, height;
+
+            function resize() {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            }
+            resize();
+            window.addEventListener('resize', resize);
+
+            const particles = [];
+            const particleCount = Math.min(window.innerWidth < 640 ? 30 : 65, 75);
+
+            class Ember {
+                constructor() {
+                    this.reset();
+                }
+                reset() {
+                    this.x = Math.random() * width;
+                    this.y = height + Math.random() * 40;
+                    this.size = Math.random() * 2.2 + 0.8;
+                    this.speedY = Math.random() * 1.1 + 0.3;
+                    this.speedX = (Math.random() - 0.5) * 0.7;
+                    this.opacity = Math.random() * 0.7 + 0.2;
+                    this.color = Math.random() > 0.4 ? 'rgba(255, 184, 0,' : 'rgba(234, 88, 12,';
+                }
+                update() {
+                    this.y -= this.speedY;
+                    this.x += this.speedX + Math.sin(this.y * 0.007) * 0.4;
+                    this.opacity -= 0.002;
+                    if (this.y < -10 || this.opacity <= 0) {
+                        this.reset();
+                    }
+                }
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fillStyle = this.color + this.opacity + ')';
+                    ctx.shadowBlur = 8;
+                    ctx.shadowColor = '#f59e0b';
+                    ctx.fill();
+                }
+            }
+
+            for (let i = 0; i < particleCount; i++) {
+                const p = new Ember();
+                p.y = Math.random() * height;
+                particles.push(p);
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, width, height);
+                for (let i = 0; i < particles.length; i++) {
+                    particles[i].update();
+                    particles[i].draw();
+                }
+                requestAnimationFrame(animate);
+            }
+            animate();
+        }
+    </script>
+</body>
+</html>
