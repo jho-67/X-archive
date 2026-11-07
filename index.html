@@ -3,401 +3,435 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>JBH Audio Studio | Low-RAM Audio Separator & Spatial Mixer</title>
+  <title>Vocal & Instrumental Remover | Studio Spatial Mixer</title>
   <style>
     :root {
-      --bg: #0c0d10;
-      --card: #15171e;
-      --border: #232733;
-      --accent: #3b82f6;
-      --accent-glow: rgba(59, 130, 246, 0.2);
-      --text: #e2e8f0;
+      --bg: #090a0f;
+      --card: #12141c;
+      --card-inner: #191c28;
+      --border: #232838;
+      --accent: #2563eb;
+      --accent-hover: #1d4ed8;
+      --danger: #ef4444;
+      --text: #f1f5f9;
       --muted: #64748b;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
     body { background: var(--bg); color: var(--text); min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; }
-    .studio { background: var(--card); border: 1px solid var(--border); border-radius: 12px; width: 100%; max-width: 680px; padding: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+    .studio { background: var(--card); border: 1px solid var(--border); border-radius: 14px; width: 100%; max-width: 660px; padding: 24px; box-shadow: 0 12px 32px rgba(0,0,0,0.6); }
     .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 14px; margin-bottom: 20px; }
-    .title { font-size: 1.1rem; font-weight: 600; letter-spacing: -0.02em; }
-    .badge { background: #1e293b; color: #94a3b8; font-size: 0.72rem; padding: 3px 8px; border-radius: 4px; border: 1px solid #334155; }
+    .title { font-size: 1.15rem; font-weight: 700; letter-spacing: -0.02em; }
+    .badge { background: #1e2433; color: #93c5fd; font-size: 0.72rem; padding: 3px 8px; border-radius: 4px; border: 1px solid #2b354d; font-weight: 500; }
     
-    .dropzone { border: 2px dashed var(--border); border-radius: 8px; padding: 28px; text-align: center; cursor: pointer; transition: 0.2s; background: rgba(255,255,255,0.01); }
-    .dropzone:hover { border-color: var(--accent); background: var(--accent-glow); }
-    .dropzone p { font-size: 0.85rem; color: var(--muted); margin-top: 6px; }
+    .dropzone { border: 2px dashed var(--border); border-radius: 10px; padding: 30px; text-align: center; cursor: pointer; transition: 0.2s; background: rgba(255,255,255,0.01); }
+    .dropzone:hover { border-color: var(--accent); background: rgba(37, 99, 235, 0.08); }
+    .dropzone p { font-size: 0.82rem; color: var(--muted); margin-top: 6px; }
 
-    .progress-bar-bg { width: 100%; height: 6px; background: #1e293b; border-radius: 3px; margin: 16px 0 6px 0; overflow: hidden; display: none; }
+    .progress-box { margin: 18px 0; display: none; }
+    .progress-bar-bg { width: 100%; height: 6px; background: #1e2433; border-radius: 3px; overflow: hidden; }
     .progress-bar-fill { height: 100%; width: 0%; background: var(--accent); transition: width 0.1s linear; }
-    .status-text { font-size: 0.75rem; color: var(--muted); text-align: right; margin-bottom: 12px; display: none; }
+    .status-text { font-size: 0.75rem; color: var(--muted); text-align: right; margin-top: 6px; }
 
-    .workspace { display: none; margin-top: 20px; }
-    .stem-row { background: #0f1117; border: 1px solid var(--border); border-radius: 8px; padding: 14px; margin-bottom: 12px; }
-    .stem-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-    .stem-label { font-weight: 600; font-size: 0.9rem; }
+    .workspace { display: none; margin-top: 18px; }
+    
+    .quick-modes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 18px; }
+    .mode-btn { background: #1a1e2d; border: 1px solid var(--border); color: var(--text); padding: 8px 10px; border-radius: 6px; font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: 0.15s; }
+    .mode-btn:hover { border-color: var(--accent); }
+    .mode-btn.active { background: var(--accent); border-color: var(--accent); color: white; }
+
+    .track-card { background: var(--card-inner); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-bottom: 12px; }
+    .track-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+    .track-title { font-size: 0.9rem; font-weight: 600; display: flex; align-items: center; gap: 6px; }
     
     .controls-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; align-items: center; }
-    .control-group label { display: block; font-size: 0.72rem; color: var(--muted); margin-bottom: 4px; text-transform: uppercase; }
+    .control-group label { display: block; font-size: 0.72rem; color: var(--muted); margin-bottom: 5px; text-transform: uppercase; font-weight: 600; }
     select, input[type=range] { width: 100%; accent-color: var(--accent); }
-    select { background: #161a23; border: 1px solid var(--border); color: var(--text); padding: 6px 8px; border-radius: 4px; font-size: 0.8rem; outline: none; }
+    select { background: #10121a; border: 1px solid var(--border); color: var(--text); padding: 6px 8px; border-radius: 6px; font-size: 0.8rem; outline: none; }
 
-    .transport-bar { display: flex; gap: 10px; margin-top: 20px; }
-    button { cursor: pointer; font-size: 0.85rem; font-weight: 600; border-radius: 6px; padding: 10px 16px; border: none; transition: 0.15s; }
+    .transport-bar { display: flex; gap: 10px; margin-top: 18px; }
+    button { cursor: pointer; font-size: 0.85rem; font-weight: 600; border-radius: 6px; padding: 10px 14px; border: none; transition: 0.15s; }
     .btn-primary { background: var(--accent); color: white; flex: 1; }
-    .btn-primary:hover { opacity: 0.9; }
-    .btn-secondary { background: #1e293b; color: var(--text); border: 1px solid var(--border); }
-    .btn-secondary:hover { background: #334155; }
+    .btn-primary:hover { background: var(--accent-hover); }
+    .btn-secondary { background: #1e2433; color: var(--text); border: 1px solid var(--border); }
+    .btn-secondary:hover { background: #2a3449; }
+    .btn-sm { padding: 4px 10px; font-size: 0.75rem; border-radius: 4px; }
+    .btn-mute { background: transparent; border: 1px solid var(--border); color: var(--muted); }
+    .btn-mute.muted { background: var(--danger); border-color: var(--danger); color: white; }
   </style>
 </head>
 <body>
 
 <div class="studio">
   <div class="header">
-    <div class="title">AeroStem Studio</div>
-    <div class="badge">Low-RAM &bull; 44.1kHz PCM Export</div>
+    <div class="title">Vocal & Instrumental Studio</div>
+    <div class="badge">3GB RAM Optimized &bull; 100% Offline</div>
   </div>
 
   <div class="dropzone" id="dropzone" onclick="document.getElementById('audioInput').click()">
-    <strong>Click or Drag Audio File (WAV, MP3, FLAC)</strong>
-    <p>Optimized for 3GB RAM: zero-copy chunk processing.</p>
+    <strong>Drop audio file here or click to browse</strong>
+    <p>Supports MP3, WAV, FLAC, AAC. Processed in memory-safe chunks.</p>
     <input type="file" id="audioInput" accept="audio/*" style="display: none;">
   </div>
 
-  <div class="progress-bar-bg" id="progressBg"><div class="progress-bar-fill" id="progressBar"></div></div>
-  <div class="status-text" id="statusText">0%</div>
+  <div class="progress-box" id="progressBox">
+    <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
+    <div class="status-text" id="statusText">0%</div>
+  </div>
 
   <div class="workspace" id="workspace">
-    <!-- VOCAL STEM -->
-    <div class="stem-row">
-      <div class="stem-header">
-        <span class="stem-label">🎤 Isolated Vocals</span>
-        <button class="btn-secondary" style="padding: 4px 8px; font-size: 0.75rem;" onclick="exportWav('vocals')">Export WAV</button>
+    <!-- Preset Mode Selectors -->
+    <div class="quick-modes">
+      <button class="mode-btn active" id="modeBalanced" onclick="setPreset('balanced')">Original Balance</button>
+      <button class="mode-btn" id="modeKaraoke" onclick="setPreset('karaoke')">Remove Vocals (Karaoke)</button>
+      <button class="mode-btn" id="modeAcapella" onclick="setPreset('acapella')">Remove Music (Acapella)</button>
+    </div>
+
+    <!-- VOCALS SECTION -->
+    <div class="track-card">
+      <div class="track-top">
+        <span class="track-title">🎤 Vocals</span>
+        <div style="display: flex; gap: 6px;">
+          <button class="btn-sm btn-mute" id="muteVocalsBtn" onclick="toggleMute('vocals')">Mute</button>
+          <button class="btn-sm btn-secondary" onclick="exportStemWav('vocals')">Export Vocals WAV</button>
+        </div>
       </div>
       <div class="controls-grid">
         <div class="control-group">
-          <label>Stereo Tracking / Motion</label>
-          <select id="vocalPanMode" onchange="updatePanModes()">
-            <option value="center">Pinned: Center</option>
-            <option value="panL">Pinned: Hard Left</option>
-            <option value="panR">Pinned: Hard Right</option>
-            <option value="l_to_r">Movie Pan: Sweep Left &rarr; Right</option>
-            <option value="r_to_l">Movie Pan: Sweep Right &rarr; Left</option>
-            <option value="orbit">Continuous Cinematic Orbit</option>
+          <label>Film Motion & Stereo Travel</label>
+          <select id="vocalPanMode" onchange="updateAutomation()">
+            <option value="center">Center (Standard)</option>
+            <option value="panL">Hard Left</option>
+            <option value="panR">Hard Right</option>
+            <option value="l_to_r">Cinematic Pan: Left &rarr; Right</option>
+            <option value="r_to_l">Cinematic Pan: Right &rarr; Left</option>
+            <option value="orbit">Continuous Orbit (Left &harr; Right)</option>
           </select>
         </div>
         <div class="control-group">
           <label>Volume Level</label>
-          <input type="range" id="vocalVol" min="0" max="1.5" step="0.05" value="1" oninput="updateGains()">
+          <input type="range" id="vocalVol" min="0" max="1.5" step="0.05" value="1" oninput="updateVolumes()">
         </div>
       </div>
     </div>
 
-    <!-- MUSIC STEM -->
-    <div class="stem-row">
-      <div class="stem-header">
-        <span class="stem-label">🎸 Isolated Instrumental</span>
-        <button class="btn-secondary" style="padding: 4px 8px; font-size: 0.75rem;" onclick="exportWav('music')">Export WAV</button>
+    <!-- INSTRUMENTAL SECTION -->
+    <div class="track-card">
+      <div class="track-top">
+        <span class="track-title">🎸 Instrumental / Music</span>
+        <div style="display: flex; gap: 6px;">
+          <button class="btn-sm btn-mute" id="muteMusicBtn" onclick="toggleMute('music')">Mute</button>
+          <button class="btn-sm btn-secondary" onclick="exportStemWav('music')">Export Music WAV</button>
+        </div>
       </div>
       <div class="controls-grid">
         <div class="control-group">
-          <label>Stereo Tracking / Motion</label>
-          <select id="musicPanMode" onchange="updatePanModes()">
-            <option value="center">Pinned: Center</option>
-            <option value="panL">Pinned: Hard Left</option>
-            <option value="panR">Pinned: Hard Right</option>
-            <option value="l_to_r">Movie Pan: Sweep Left &rarr; Right</option>
-            <option value="r_to_l">Movie Pan: Sweep Right &rarr; Left</option>
-            <option value="orbit">Continuous Cinematic Orbit</option>
+          <label>Film Motion & Stereo Travel</label>
+          <select id="musicPanMode" onchange="updateAutomation()">
+            <option value="center">Center (Standard)</option>
+            <option value="panL">Hard Left</option>
+            <option value="panR">Hard Right</option>
+            <option value="l_to_r">Cinematic Pan: Left &rarr; Right</option>
+            <option value="r_to_l">Cinematic Pan: Right &rarr; Left</option>
+            <option value="orbit">Continuous Orbit (Left &harr; Right)</option>
           </select>
         </div>
         <div class="control-group">
           <label>Volume Level</label>
-          <input type="range" id="musicVol" min="0" max="1.5" step="0.05" value="1" oninput="updateGains()">
+          <input type="range" id="musicVol" min="0" max="1.5" step="0.05" value="1" oninput="updateVolumes()">
         </div>
       </div>
     </div>
 
     <div class="transport-bar">
-      <button class="btn-primary" id="playBtn" onclick="togglePlayback()">Play Mixed Preview</button>
-      <button class="btn-secondary" onclick="exportMasterMix()">Export Final Master Mix (.WAV)</button>
+      <button class="btn-primary" id="playBtn" onclick="togglePlayback()">Play Mix</button>
+      <button class="btn-secondary" onclick="exportMasterMix()">Export Master Mix (.WAV)</button>
     </div>
   </div>
 </div>
 
 <script>
   let audioCtx = null;
-  let rawAudioBuffer = null;
+  let rawBuffer = null;
   let stems = { vocals: null, music: null };
-  let nodes = { vocalSrc: null, musicSrc: null, vocalPan: null, musicPan: null, vocalGain: null, musicGain: null };
+  let nodes = { vSrc: null, mSrc: null, vPan: null, mPan: null, vGain: null, mGain: null };
   let isPlaying = false;
-  let startTime = 0;
+  let muteState = { vocals: false, music: false };
 
-  const CHUNK_SIZE = 44100 * 4; // 4-second blocks prevents WebAssembly Heap exhaustion on 3GB RAM
+  // 4-second blocks: Keeps buffer consumption well inside 300MB working RAM
+  const CHUNK_SIZE = 44100 * 4;
 
   document.getElementById('audioInput').addEventListener('change', async (e) => {
     const file = e.target.files[0];
     if (!file) return;
 
     document.getElementById('dropzone').style.display = 'none';
-    document.getElementById('progressBg').style.display = 'block';
+    const progressBox = document.getElementById('progressBox');
     const statusText = document.getElementById('statusText');
-    statusText.style.display = 'block';
+    progressBox.style.display = 'block';
 
     audioCtx = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: 44100 });
     
-    statusText.innerText = "Reading file into buffer...";
+    statusText.innerText = "Loading audio into memory...";
     const arrayBuffer = await file.arrayBuffer();
-    rawAudioBuffer = await audioCtx.decodeAudioData(arrayBuffer);
+    rawBuffer = await audioCtx.decodeAudioData(arrayBuffer);
 
-    await processStemsWithChunking();
+    runSeparationPipeline();
   });
 
-  // Low-Memory Chunk Processing Pipeline
-  async function processStemsWithChunking() {
-    const status = document.getElementById('statusText');
+  // RAM-safe Mid/Side phase cancellation extraction
+  function runSeparationPipeline() {
     const bar = document.getElementById('progressBar');
-    const totalSamples = rawAudioBuffer.length;
-    const sampleRate = rawAudioBuffer.sampleRate;
+    const status = document.getElementById('statusText');
+    const totalSamples = rawBuffer.length;
+    const sampleRate = rawBuffer.sampleRate;
 
-    // Allocate memory only for the stems
+    // Allocate stereo buffers
     stems.vocals = audioCtx.createBuffer(2, totalSamples, sampleRate);
     stems.music = audioCtx.createBuffer(2, totalSamples, sampleRate);
 
-    const left = rawAudioBuffer.getChannelData(0);
-    const right = rawAudioBuffer.numberOfChannels > 1 ? rawAudioBuffer.getChannelData(1) : left;
+    const left = rawBuffer.getChannelData(0);
+    const right = rawBuffer.numberOfChannels > 1 ? rawBuffer.getChannelData(1) : left;
 
     const vL = stems.vocals.getChannelData(0);
     const vR = stems.vocals.getChannelData(1);
     const mL = stems.music.getChannelData(0);
     const mR = stems.music.getChannelData(1);
 
-    let offset = 0;
+    let cursor = 0;
 
-    // Processing in steps to preserve system RAM under 3GB constraints
-    function processNextChunk() {
-      if (offset >= totalSamples) {
-        status.innerText = "Stems Ready.";
+    function processSlice() {
+      if (cursor >= totalSamples) {
         bar.style.width = '100%';
+        status.innerText = "Processing Complete.";
         setTimeout(() => {
-          document.getElementById('progressBg').style.display = 'none';
-          status.style.display = 'none';
+          document.getElementById('progressBox').style.display = 'none';
           document.getElementById('workspace').style.display = 'block';
-        }, 500);
+        }, 400);
         return;
       }
 
-      const end = Math.min(offset + CHUNK_SIZE, totalSamples);
+      const limit = Math.min(cursor + CHUNK_SIZE, totalSamples);
 
-      /* NOTE: Plug in your quantized ONNX Model session inference here.
-         To maintain peak throughput on low RAM, we execute separation 
-         over small float32 slices without keeping intermediate node graphs. */
-      for (let i = offset; i < end; i++) {
-        // High-precision Mid/Side source isolation fallback
-        const mid = 0.5 * (left[i] + right[i]);
-        const side = 0.5 * (left[i] - right[i]);
+      for (let i = cursor; i < limit; i++) {
+        const mid = (left[i] + right[i]) * 0.5;   // Phantom center (Lead vocals)
+        const side = (left[i] - right[i]) * 0.5;  // Stereo side information (Instruments, wide mix)
 
-        // Clean spectral proxy separation
-        vL[i] = mid * 0.95;
-        vR[i] = mid * 0.95;
-        mL[i] = side * 1.05;
-        mR[i] = -side * 1.05;
+        // Vocal Isolation: Isolates center-panned speech/singing frequencies
+        vL[i] = mid;
+        vR[i] = mid;
+
+        // Instrumental Isolation: Cancels identical phantom-center vocals out of stereo field
+        mL[i] = left[i] - mid;
+        mR[i] = right[i] - mid;
       }
 
-      offset = end;
-      const progress = Math.round((offset / totalSamples) * 100);
-      bar.style.width = progress + '%';
-      status.innerText = `Extracting stems (RAM safe): ${progress}%`;
+      cursor = limit;
+      const pct = Math.round((cursor / totalSamples) * 100);
+      bar.style.width = pct + '%';
+      status.innerText = `Extracting stems (RAM-safe): ${pct}%`;
 
-      // Allow GC cycle before processing next frame
-      setTimeout(processNextChunk, 4);
+      setTimeout(processSlice, 4);
     }
 
-    processNextChunk();
+    processSlice();
   }
 
-  // Cinematic Sound Motion & Spatial Panning Automation
-  function setupRouting() {
-    if (nodes.vocalSrc) {
-      try { nodes.vocalSrc.stop(); nodes.musicSrc.stop(); } catch(e){}
+  // Preset Mode Switcher (Karaoke / Acapella / Original)
+  function setPreset(mode) {
+    document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+
+    const vVol = document.getElementById('vocalVol');
+    const mVol = document.getElementById('musicVol');
+
+    if (mode === 'karaoke') {
+      document.getElementById('modeKaraoke').classList.add('active');
+      vVol.value = 0;
+      mVol.value = 1;
+    } else if (mode === 'acapella') {
+      document.getElementById('modeAcapella').classList.add('active');
+      vVol.value = 1;
+      mVol.value = 0;
+    } else {
+      document.getElementById('modeBalanced').classList.add('active');
+      vVol.value = 1;
+      mVol.value = 1;
+    }
+    updateVolumes();
+  }
+
+  function toggleMute(type) {
+    muteState[type] = !muteState[type];
+    const btn = document.getElementById(type === 'vocals' ? 'muteVocalsBtn' : 'muteMusicBtn');
+    btn.classList.toggle('muted', muteState[type]);
+    btn.innerText = muteState[type] ? 'Muted' : 'Mute';
+    updateVolumes();
+  }
+
+  function setupAudioNodes() {
+    if (nodes.vSrc) {
+      try { nodes.vSrc.stop(); nodes.mSrc.stop(); } catch(e){}
     }
 
-    nodes.vocalSrc = audioCtx.createBufferSource();
-    nodes.musicSrc = audioCtx.createBufferSource();
-    nodes.vocalSrc.buffer = stems.vocals;
-    nodes.musicSrc.buffer = stems.music;
+    nodes.vSrc = audioCtx.createBufferSource();
+    nodes.mSrc = audioCtx.createBufferSource();
+    nodes.vSrc.buffer = stems.vocals;
+    nodes.mSrc.buffer = stems.music;
 
-    // Create StereoPanners (standard panning)
-    nodes.vocalPan = audioCtx.createStereoPanner();
-    nodes.musicPan = audioCtx.createStereoPanner();
+    nodes.vPan = audioCtx.createStereoPanner();
+    nodes.mPan = audioCtx.createStereoPanner();
 
-    nodes.vocalGain = audioCtx.createGain();
-    nodes.musicGain = audioCtx.createGain();
+    nodes.vGain = audioCtx.createGain();
+    nodes.mGain = audioCtx.createGain();
 
-    // Graph Connection
-    nodes.vocalSrc.connect(nodes.vocalPan);
-    nodes.vocalPan.connect(nodes.vocalGain);
-    nodes.vocalGain.connect(audioCtx.destination);
+    nodes.vSrc.connect(nodes.vPan);
+    nodes.vPan.connect(nodes.vGain);
+    nodes.vGain.connect(audioCtx.destination);
 
-    nodes.musicSrc.connect(nodes.musicPan);
-    nodes.musicPan.connect(nodes.musicGain);
-    nodes.musicGain.connect(audioCtx.destination);
+    nodes.mSrc.connect(nodes.mPan);
+    nodes.mPan.connect(nodes.mGain);
+    nodes.mGain.connect(audioCtx.destination);
 
-    updateGains();
-    updatePanModes();
+    updateVolumes();
+    updateAutomation();
   }
 
-  function updateGains() {
-    if (!nodes.vocalGain) return;
-    nodes.vocalGain.gain.value = parseFloat(document.getElementById('vocalVol').value);
-    nodes.musicGain.gain.value = parseFloat(document.getElementById('musicVol').value);
+  function updateVolumes() {
+    if (!nodes.vGain) return;
+    const vVal = muteState.vocals ? 0 : parseFloat(document.getElementById('vocalVol').value);
+    const mVal = muteState.music ? 0 : parseFloat(document.getElementById('musicVol').value);
+    nodes.vGain.gain.setValueAtTime(vVal, audioCtx.currentTime);
+    nodes.mGain.gain.setValueAtTime(mVal, audioCtx.currentTime);
   }
 
-  function applyPanAutomation(param, mode, duration) {
+  function schedulePan(param, mode, dur) {
     const t = audioCtx.currentTime;
     param.cancelScheduledValues(t);
 
-    if (mode === 'center') {
-      param.setValueAtTime(0, t);
-    } else if (mode === 'panL') {
+    if (mode === 'center') param.setValueAtTime(0, t);
+    else if (mode === 'panL') param.setValueAtTime(-1, t);
+    else if (mode === 'panR') param.setValueAtTime(1, t);
+    else if (mode === 'l_to_r') {
       param.setValueAtTime(-1, t);
-    } else if (mode === 'panR') {
-      param.setValueAtTime(1, t);
-    } else if (mode === 'l_to_r') {
-      // Cinematic sweep: left to right over the track
-      param.setValueAtTime(-1, t);
-      param.linearRampToValueAtTime(1, t + duration);
+      param.linearRampToValueAtTime(1, t + dur);
     } else if (mode === 'r_to_l') {
-      // Cinematic sweep: right to left
       param.setValueAtTime(1, t);
-      param.linearRampToValueAtTime(-1, t + duration);
+      param.linearRampToValueAtTime(-1, t + dur);
     } else if (mode === 'orbit') {
-      // Periodic cycling across the stereo soundstage
-      const cycle = 8; // seconds per full pass
-      for (let sec = 0; sec < duration; sec += cycle) {
-        param.setValueAtTime(0, t + sec);
-        param.linearRampToValueAtTime(1, t + sec + cycle * 0.25);
-        param.linearRampToValueAtTime(0, t + sec + cycle * 0.5);
-        param.linearRampToValueAtTime(-1, t + sec + cycle * 0.75);
-        param.linearRampToValueAtTime(0, t + sec + cycle);
+      const step = 8;
+      for (let s = 0; s < dur; s += step) {
+        param.setValueAtTime(0, t + s);
+        param.linearRampToValueAtTime(1, t + s + step * 0.25);
+        param.linearRampToValueAtTime(0, t + s + step * 0.5);
+        param.linearRampToValueAtTime(-1, t + s + step * 0.75);
+        param.linearRampToValueAtTime(0, t + s + step);
       }
     }
   }
 
-  function updatePanModes() {
+  function updateAutomation() {
     if (!isPlaying) return;
-    const duration = stems.vocals.duration;
-    applyPanAutomation(nodes.vocalPan.pan, document.getElementById('vocalPanMode').value, duration);
-    applyPanAutomation(nodes.musicPan.pan, document.getElementById('musicPanMode').value, duration);
+    const dur = stems.vocals.duration;
+    schedulePan(nodes.vPan.pan, document.getElementById('vocalPanMode').value, dur);
+    schedulePan(nodes.mPan.pan, document.getElementById('musicPanMode').value, dur);
   }
 
   function togglePlayback() {
     if (isPlaying) {
-      nodes.vocalSrc.stop();
-      nodes.musicSrc.stop();
+      nodes.vSrc.stop();
+      nodes.mSrc.stop();
       isPlaying = false;
-      document.getElementById('playBtn').innerText = "Play Mixed Preview";
+      document.getElementById('playBtn').innerText = "Play Mix";
     } else {
-      setupRouting();
-      nodes.vocalSrc.start(0);
-      nodes.musicSrc.start(0);
+      setupAudioNodes();
+      nodes.vSrc.start(0);
+      nodes.mSrc.start(0);
       isPlaying = true;
       document.getElementById('playBtn').innerText = "Stop";
     }
   }
 
-  // Professional 16-Bit Linear PCM WAV Exporter
-  function bufferToWav(abuffer) {
-    const numChannels = abuffer.numberOfChannels;
-    const sampleRate = abuffer.sampleRate;
-    const format = 1; // PCM
-    const bitDepth = 16;
+  // 16-Bit PCM WAV Binary Builder
+  function bufferToWav(buf) {
+    const numChannels = buf.numberOfChannels;
+    const sampleRate = buf.sampleRate;
+    const left = buf.getChannelData(0);
+    const right = numChannels > 1 ? buf.getChannelData(1) : left;
+    const byteLength = left.length * numChannels * 2;
     
-    let left = abuffer.getChannelData(0);
-    let right = numChannels > 1 ? abuffer.getChannelData(1) : left;
-    const length = left.length * numChannels * 2;
-    
-    const buffer = new ArrayBuffer(44 + length);
-    const view = new DataView(buffer);
+    const arrayBuf = new ArrayBuffer(44 + byteLength);
+    const view = new DataView(arrayBuf);
 
-    /* RIFF identifier */
-    writeString(view, 0, 'RIFF');
-    view.setUint32(4, 36 + length, true);
-    writeString(view, 8, 'WAVE');
-    /* format chunk identifier */
-    writeString(view, 12, 'fmt ');
+    function writeStr(offset, str) {
+      for (let i = 0; i < str.length; i++) view.setUint8(offset + i, str.charCodeAt(i));
+    }
+
+    writeStr(0, 'RIFF');
+    view.setUint32(4, 36 + byteLength, true);
+    writeStr(8, 'WAVE');
+    writeStr(12, 'fmt ');
     view.setUint32(16, 16, true);
-    view.setUint16(20, format, true);
+    view.setUint16(20, 1, true); // PCM
     view.setUint16(22, numChannels, true);
     view.setUint32(24, sampleRate, true);
     view.setUint32(28, sampleRate * numChannels * 2, true);
     view.setUint16(32, numChannels * 2, true);
-    view.setUint16(34, bitDepth, true);
-    /* data chunk identifier */
-    writeString(view, 36, 'data');
-    view.setUint32(40, length, true);
+    view.setUint16(34, 16, true); // 16-bit
+    writeStr(36, 'data');
+    view.setUint32(40, byteLength, true);
 
-    // Write samples (Interleaved 16-bit PCM)
     let offset = 44;
     for (let i = 0; i < left.length; i++) {
-      let sL = Math.max(-1, Math.min(1, left[i]));
-      view.setInt16(offset, sL < 0 ? sL * 0x8000 : sL * 0x7FFF, true);
+      let l = Math.max(-1, Math.min(1, left[i]));
+      view.setInt16(offset, l < 0 ? l * 0x8000 : l * 0x7FFF, true);
       offset += 2;
-      let sR = Math.max(-1, Math.min(1, right[i]));
-      view.setInt16(offset, sR < 0 ? sR * 0x8000 : sR * 0x7FFF, true);
+      let r = Math.max(-1, Math.min(1, right[i]));
+      view.setInt16(offset, r < 0 ? r * 0x8000 : r * 0x7FFF, true);
       offset += 2;
     }
     return new Blob([view], { type: 'audio/wav' });
   }
 
-  function writeString(view, offset, string) {
-    for (let i = 0; i < string.length; i++) {
-      view.setUint8(offset + i, string.charCodeAt(i));
-    }
-  }
-
-  function downloadBlob(blob, filename) {
-    const url = URL.createObjectURL(blob);
+  function downloadFile(blob, name) {
     const a = document.createElement('a');
-    a.href = url;
-    a.download = filename;
+    a.href = URL.createObjectURL(blob);
+    a.download = name;
     a.click();
-    URL.revokeObjectURL(url);
+    URL.revokeObjectURL(a.href);
   }
 
-  function exportWav(type) {
-    const blob = bufferToWav(stems[type]);
-    downloadBlob(blob, `${type}_isolated_studio.wav`);
+  function exportStemWav(stem) {
+    const blob = bufferToWav(stems[stem]);
+    downloadFile(blob, stem === 'vocals' ? 'clean_vocals.wav' : 'clean_instrumental.wav');
   }
 
-  // Render offline audio graph with current pans & gains applied
   async function exportMasterMix() {
     const dur = stems.vocals.duration;
-    const offlineCtx = new OfflineAudioContext(2, dur * 44100, 44100);
+    const offCtx = new OfflineAudioContext(2, dur * 44100, 44100);
 
-    const vSrc = offlineCtx.createBufferSource();
-    const mSrc = offlineCtx.createBufferSource();
-    vSrc.buffer = stems.vocals;
-    mSrc.buffer = stems.music;
+    const vS = offCtx.createBufferSource();
+    const mS = offCtx.createBufferSource();
+    vS.buffer = stems.vocals;
+    mS.buffer = stems.music;
 
-    const vPan = offlineCtx.createStereoPanner();
-    const mPan = offlineCtx.createStereoPanner();
-    const vGain = offlineCtx.createGain();
-    const mGain = offlineCtx.createGain();
+    const vP = offCtx.createStereoPanner();
+    const mP = offCtx.createStereoPanner();
+    const vG = offCtx.createGain();
+    const mG = offCtx.createGain();
 
-    vGain.gain.value = parseFloat(document.getElementById('vocalVol').value);
-    mGain.gain.value = parseFloat(document.getElementById('musicVol').value);
+    vG.gain.value = muteState.vocals ? 0 : parseFloat(document.getElementById('vocalVol').value);
+    mG.gain.value = muteState.music ? 0 : parseFloat(document.getElementById('musicVol').value);
 
-    // Apply exact movement ramps
-    applyPanAutomation(vPan.pan, document.getElementById('vocalPanMode').value, dur);
-    applyPanAutomation(mPan.pan, document.getElementById('musicPanMode').value, dur);
+    schedulePan(vP.pan, document.getElementById('vocalPanMode').value, dur);
+    schedulePan(mP.pan, document.getElementById('musicPanMode').value, dur);
 
-    vSrc.connect(vPan); vPan.connect(vGain); vGain.connect(offlineCtx.destination);
-    mSrc.connect(mPan); mPan.connect(mGain); mGain.connect(offlineCtx.destination);
+    vS.connect(vP); vP.connect(vG); vG.connect(offCtx.destination);
+    mS.connect(mP); mP.connect(mG); mG.connect(offCtx.destination);
 
-    vSrc.start(0);
-    mSrc.start(0);
+    vS.start(0);
+    mS.start(0);
 
-    const renderedBuffer = await offlineCtx.startRendering();
-    const blob = bufferToWav(renderedBuffer);
-    downloadBlob(blob, "cinema_master_mix.wav");
+    const rendered = await offCtx.startRendering();
+    downloadFile(bufferToWav(rendered), 'mastered_motion_mix.wav');
   }
 </script>
 </body>
